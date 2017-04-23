@@ -1,0 +1,1 @@
+<?php echo $cartsummarytop['total_qty']; ?>

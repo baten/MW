@@ -1,0 +1,259 @@
+a:hover,
+.date-times .date-upcoming{
+  color: #21b0d1;
+}
+
+h1,
+.services h1,
+.testimonial-wrapper h1{
+color           : #21b0d1;
+}
+
+ul.nav.navbar-nav li:last-child:hover{
+    border-bottom: 0 solid transparent;
+    }
+
+
+#off-canvas-close-btn:hover,
+#off-canvas-close-btn:focus,
+.tr-slider-btn,
+.reservation .carousel-indicators .active,
+.services .nav-tabs li.active a, 
+.services .nav-tabs li a:hover{
+	background-color : #21b0d1;
+}
+.gallery-trigger ul li a.active, .gallery-trigger ul li a:hover{
+  background-color : #4bdcfe;
+  border: 1px solid #21b0d1;
+}
+.tr-slider-btn:hover{
+	color           : #21b0d1 !important;
+}
+.fa-ul.list-inline.top-info.level-one li a {
+    border: 1px solid #21b0d1; 
+    background-color:  #0690b0;
+}
+
+.fa-ul.list-inline.top-info.level-one li a:hover {
+    background-color: rgb(28, 160, 190);
+}
+.fa-ul.list-inline.top-info.level-one li a.tel-no:hover{
+	background-color: transparent;
+}
+.tp-bullets.preview4 .bullet:hover, .tp-bullets.preview4 .bullet.selected,
+.header-top,.book-now-wrapper .toggle,
+.btn,
+.galleri-wrapper .gallary-image .fa,
+.footer-bottom .fa-angle-up,
+.leave-comments .btn-read-more {
+    background-color: #21b0d1 !important;
+  }
+
+.btn:hover,
+.leave-comments .btn-read-more:hover{
+    background-color: #0690b0 !important;
+  }
+.flags-align li:hover{
+  background-color:rgba(6,144,176,0.3);
+}
+ .top-social.level-one li.location:hover,
+.start span{
+	color: #21b0d1;
+}
+.fa-ul.list-inline.top-info.level-one li a.tel-no:hover {
+      color: #ACE7F4;
+}
+.flag-area .dropdown:before,
+.event-media .media-body h3 a,
+.dropdown dt a span,
+.dropdown a, .dropdown a:visited,
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover
+.navbar-default .navbar-nav > .active > a:focus .navbar-default .navbar-nav > .active > a.open,
+ ul.nav.navbar-nav li a:hover,
+ ul.nav.navbar-nav li a:focus,
+ ul.level-one.dropdown-menu.single-dropdown li a:hover,
+ .time p, .read-more a, .blue-night, .take-look-wrapper h1,
+ .food-menu-wrapper .media .media-body h2 span,
+ .book-table-wrapper .booking-form h1,
+ .signature-wrapper .price span,
+ .owl-wrap .owl-controls i:hover::before,
+ .open-time strong,
+ .address strong,
+ .open-time i,
+ .address i,
+ footer .footer-top ul li a i:hover:before,
+ .footer-bottom p a:hover,
+ .flags-align li:hover,
+ .popup-wrapper p a:hover{
+ color           : #21b0d1;
+}
+
+ul.nav.navbar-nav li.active,
+ul.nav.navbar-nav li:hover{
+    border-bottom: 2px solid #21b0d1;
+
+}
+.food-menu-wrapper h2.item-name {
+    border-bottom: 1px solid #21b0d1;
+}
+.twitter-avatar,
+.twt-area .date{
+    color: #21b0d1; 
+}
+
+.dropdown dd ul{
+  border: 1px solid #21b0d1;
+}
+
+.time.text-center p,
+.date-times p:before{
+	color: #21b0d1;
+}
+.welcome-note.text-center { 
+    border-bottom: 3px solid #21b0d1;
+    border-top: 3px solid #21b0d1;
+}
+
+.dropdown-menu .mega-content ul li:hover {
+    border-bottom: 0 solid transparent;
+}
+.menu-carousel li.mega-carousel-more a{
+	color: #21b0d1 !important;
+}
+.dropdown-menu { 
+    border-bottom: 3px solid #21b0d1 !important;
+}
+
+.team-wrapper .contents span,
+.about-banner h1,
+.story-wrapper h2,
+.story-wrapper .contents span,
+.story-wrapper .owner-info,
+.about-brief-wrapper .contents h2,
+.our-team-section h2{
+	color: #21b0d1;
+}
+
+.team-wrapper .social { 
+    background: #21b0d1;
+}
+
+.team-wrapper .social li a {
+    color: #0A8EAC;
+}
+.team-wrapper .social::before{
+  border-bottom: 15px solid #21b0d1;
+}
+.team-wrapper .contents{
+	    border-bottom: 2px solid #21b0d1;
+}
+
+
+.menu-block .media .media-body h2 span,
+.reservation-bottom-section a{
+   color: #0690b0;
+}
+
+.reservation-top-section .carousel-indicators .active{
+  background: #0690b0;
+  border: 1px solid #0690b0; 
+}
+.event-heading address strong,
+.event-wrapper address strong{
+	color: #21b0d1;
+}
+
+.date-image .date-text {
+    background-color: #21b0d1;
+}
+.event-heading .btn.btn-imfo.btn-read-more:hover {
+    background: #0690b0;
+  }
+.event-heading .btn.btn-imfo.btn-read-more,
+.event-wrapper .btn.btn-imfo.btn-read-more{
+	border-bottom: 2px solid #0690b0;
+	background-color: #21b0d1;
+}
+.book-now-wrapper .btn,
+.event-heading .btn.btn-imfo.btn-read-more:hover{
+	background-color: #480048;
+}
+.offcanvas-menu .close:hover,
+.book-now-wrapper .btn{
+	background-color: #21b0d1;
+}
+.book-now-wrapper .btn:hover,
+.date-image .date-icon {
+   background-color: rgba(33,176,209, 0.8);
+}
+.popup-wrapper input,
+#custom-search-input .input-group,
+.leave-comments .form-control,
+.contact-wrapper .form-wrapper .form-control:hover, 
+.contact-wrapper .form-wrapper .form-control:focus {
+    border: 1px solid #21b0d1;
+}
+
+.event-media .media-body h3,
+.event-media .date-of-event,
+.btn.btn-danger.btn-search span:before{
+	color: #21b0d1;
+}
+.event-media { 
+    border-bottom: 2px solid #21b0d1;
+}
+
+.preset-wrapper .holder .heading,
+.preset-wrapper .icon-holder{
+	background-color: #21b0d1;
+}
+.clock-time:before {
+	color: #21b0d1;
+}
+.dropdown dd ul,
+.reservation .carousel-indicators .active{
+  border:1px solid #21b0d1;
+}
+.book-table-wrapper .booking-form .form-control{
+  box-shadow: 0 1px 1px #21b0d1;
+}
+.search-wrapper .search-container .search-contents input{
+  border-bottom: 1px solid rgba(33,176,209,0.45);
+}
+.book-now-wrapper .book-now.open{
+   border-right: 2px solid #21b0d1;
+}
+
+.testimonial-wrapper .carousel-indicators .active{
+  background: #21b0d1 none repeat scroll 0 0;
+  border: 1px solid #21b0d1;
+}
+.carousel-fade .carousel-indicators li{
+ border: 1px solid #21b0d1; 
+}
+.details-text{
+  border-right: 2px solid #21b0d1;
+}
+.reservation a,
+.reservation address strong {
+    color: #21b0d1;
+}
+.reservation a:hover {
+    color: #0B6579;
+}
+ 
+.navbar-default .navbar-toggle{
+  background: #21b0d1;
+}
+/*Mobile */
+@media only screen and (max-width : 767px) {
+
+button.navbar-toggle{
+  background-color: #21b0d1;
+}
+
+
+}
+
+

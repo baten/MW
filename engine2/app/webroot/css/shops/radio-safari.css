@@ -1,0 +1,55 @@
+input[type=checkbox]:not(old),
+input[type=radio   ]:not(old){
+  width     : 2em;
+  margin    : 0;
+  padding   : 0;
+  font-size : 1em;
+  opacity   : 0;
+}
+
+input[type=checkbox]:not(old) + label,
+input[type=radio   ]:not(old) + label{
+  display      : inline-block;
+  margin-left  : -0.35em;
+  line-height  : 1.3em;
+}
+
+.book-table-wrapper .radio{
+  width: 280px;
+  margin:auto;
+  margin-top: 30px;
+}
+
+.contact-wrapper .radio{
+ width: 240px;
+  margin:auto; 
+  margin-top: 50px;
+  margin-bottom: 30px;
+}
+
+
+
+/*////////////////////////////////*/
+
+
+.contact-wrapper input[type=radio]:not(old):checked +  label > span > span{
+  display          : block;
+  width            : 0.7em;
+  height           : 0.63em;
+  margin           : 0.13em;
+  border           : 0.0625em solid #a87f41;
+  border-radius    : 0.125em;
+  background       : #a87f41;
+
+}
+
+.radio input[type="radio"]{
+  margin-left: -5px;
+}
+
+@media  (max-width : 479px) {
+
+.book-table-wrapper .booking-form .radio label{
+  font-size: 14px;
+}
+}

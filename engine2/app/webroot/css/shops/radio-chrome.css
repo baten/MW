@@ -1,0 +1,16 @@
+
+
+/*////////////////////////////////*/
+
+
+.contact-wrapper input[type=radio]:not(old):checked +  label > span > span{
+  display          : block;
+  width            : 0.7em;
+  height           : 0.7em;
+  margin           : 0.13em;
+  border           : 0.0625em solid #a87f41;
+  border-radius    : 0.125em;
+  background       : #a87f41;
+
+}
+

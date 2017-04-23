@@ -1,0 +1,38 @@
+
+@media (min-width: 1200px) {
+    .wrapper{
+      width: 1200px;
+      margin: auto;
+      }
+    }
+  @media (min-width: 991px) and (max-width: 1199px){
+    .wrapper{
+      width: 960px;
+      margin: auto;
+      }
+    }
+    @media (min-width: 849px) and (max-width: 990px){
+    .wrapper{
+      width: 840px;
+      margin: auto;
+      }
+    }
+    @media (min-width: 768px) and (max-width: 849px){
+    .wrapper{
+      width: 760px;
+      margin: auto;
+      }
+    }
+    @media (min-width: 768px) {
+    body{
+      background-color: #f1f1f1;
+      background-image: url('../../img/boxed-back.png');
+      background-attachment: fixed;
+      background-size: cover;
+    }
+    .wrapper{
+      background: #ffffff;
+      -webkit-box-shadow: 0 0 8px rgba(0,0,0,0.2);
+      box-shadow: 0 0 8px rgba(0,0,0,0.2);
+    }
+    }

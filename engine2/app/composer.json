@@ -1,0 +1,7 @@
+{
+    "require": {
+        "klarna/checkout": "4.0",
+        "klarna/php-xmlrpc": "4.0",
+        "braintree/braintree_php" : "3.10.0"
+    }
+}

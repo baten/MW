@@ -1,0 +1,1 @@
+<?php echo $cartsummary['total_price']; ?>
