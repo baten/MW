@@ -1,0 +1,4 @@
+<div>
+	<a class="btn btn-wishlist disabled" data-ng-show="wishListProducts.indexOf(productId) > -1  && userSessionData !== null && groupKey !=='wishlist' "><i data-toggle="tooltip" data-placement="top" title="{{langAddinwishlist}}" class="fa fa-heart" aria-hidden="true"></i></a>   
+	<a class="btn btn-wishlist" data-ng-show="(wishListProducts.indexOf(productId) === -1 || userLoggedData === null) &&  groupKey !=='wishlist' " data-ng-click="addWishlist($event)" id="{{productId}}"><i data-toggle="tooltip" data-placement="top" title="{{langAddtowishlist}}" class="fa fa-heart" aria-hidden="true"></i></a>
+</div>

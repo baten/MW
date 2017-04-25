@@ -1,0 +1,20 @@
+<section class="info-wrapper">
+	<div class="container">
+	  <div class="row">
+	    <div class="col-xs-12 col-sm-8 col-md-9">
+	      <div class="tab-content">
+	        <div role="tabpanel" class="tab-pane active" id="cprofile">
+	          <div class="info-boxes" data-ng-if="about.slug !== 'sponsers'">
+	            <h2 class="sub-heading">{{about.title}}</h2>
+	            <!-- content -->
+	            <div data-ng-bind-html="about.details"></div>
+	          </div>
+	          <div class="info-boxes" data-ng-if="about.slug === 'sponsers'">
+	           <div data-ng-include="'views/sponsers.html'"></div>
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</section>

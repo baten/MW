@@ -1,0 +1,23 @@
+<div class="container">  
+    <div class="wraper-inner">      
+        <div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-offset-4 col-md-4">
+				<div class="customformwrap">
+					<div class="fp">
+						<h1>{{ langsArr[langsName].forGotPass }}</h1>
+						<div class="alert {{fp.messageClass}}" data-ng-if="fp.showMessage">{{fp.showMessage}}</div>
+							<form class="proceedForm signUp" data-ng-submit="fp.forgetPassword(fp.userName)">
+								<div class="col-xs-12 col-sm-12">
+									<input id="userName" data-ng-model="fp.userName" name="fp.userName" class="form-control" type="email" required placeholder="{{ langsArr[langsName].forgotPassPlaceholder }}">
+								</div>
+								<div class="col-xs-12 col-sm-12">
+									<button class="btn" type="submit">{{ langsArr[langsName].send }}</button>
+								</div>
+							</form>
+					
+					</div>
+				</div>
+			</div>
+        </div>
+    </div>
+</div>

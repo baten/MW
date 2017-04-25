@@ -1,0 +1,90 @@
+<div class="container">  
+    <div class="wraper-inner">      
+        <div class="row">
+<div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10">
+	<div class="min-height">
+		<h1>{{ langsArr[langsName].prodOrderPrcs }}</h1>
+        <ul class="proceed-list">
+            <li class="active"><i class="icon-location-outline" aria-hidden="true"></i></li>
+            <li><i class="icon-cards-payment" aria-hidden="true"></i></li>
+          <!--   <li><i class="icon-confirmation" aria-hidden="true"></i></li> -->
+        </ul>
+        <form class="proceedForm" data-ng-submit="proceed.proceedFn()" name="proceedFrm" id="proceedFrm">      
+		<div class="col-xs-12 col-sm-6 col-md-6">
+			<label class="custombold">{{ langsArr[langsName].billInfo }}</label>
+			<div class="form-group">
+				<input class="form-control" type="text" name="name" data-ng-model="loggedUser.details.name" placeholder="Name" disabled>
+			</div>
+			<div class="form-group">
+			    <textarea class="form-control" name="address" data-ng-model="loggedUser.details.address" placeholder="write your shipping address" data-validate='[{"notEmpty":[{"message":"Please write your address"}]}]'></textarea>
+			</div>
+			<div class="form-group">
+				<select class="form-control" name="division" data-ng-model="proceed.userDivision" data-ng-change="getCitiesForFilterSection(proceed.userDivision);" data-validate='[{"notEmpty":[{"message":"Please write your division"}]}]'>
+				    <option value="">Select Division</option>
+				    <option data-ng-repeat="(key,value) in divisionList" value="{{key}}">{{value}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<select class="form-control" name="city" data-ng-model="proceed.userCity" data-validate='[{"notEmpty":[{"message":"Please write your city"}]}]'>
+				    <option value="">Select City</option>
+				    <option  data-ng-repeat="(k,vl) in cities" value="{{k}}" data-ng-selected="proceed.userCity == k">{{vl}}</option>
+				</select>
+			</div>
+			<div class="form-group">
+			   <input class="form-control" type="text" name="zip" data-ng-model="proceed.userZipCode" placeholder="zip code">
+			</div>
+			<div class="form-group">
+			</div>
+			<div class="form-group">
+			    <input class="form-control" type="text" name="phone" data-ng-model="loggedUser.details.phone" placeholder="phone" data-validate='[{"notEmpty":[{"message":"Please input your phone number"}]}]'>
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" name="instruction" data-ng-model="instruction" placeholder="ex: Call me before delivery"></textarea>
+			</div>
+			<div class="form-group">
+			    <button class="btn" type="submit">{{ langsArr[langsName].conOrder }}</button>
+			</div>
+		</div>
+    	<div class="col-xs-12 col-sm-6 col-md-6">
+	        <div class="checkbox">
+			    <label>
+			      <input type="checkbox" data-ng-model="proceed.sameAsBilling" data-ng-change="proceed.setSameToBilling()">
+			      	{{ langsArr[langsName].shipInfo }}
+			    </label>
+	  		</div>
+			<div class="billing-info">
+				<div class="form-group">
+				    <input class="form-control" type="text" name="receiver" data-ng-model="proceed.receiver" placeholder="name" data-validate='[{"notEmpty":[{"message":"Please input your name"}]}]'>
+				</div>
+				<div class="form-group">
+				    <textarea class="form-control" name="shippingAddress" data-ng-model="proceed.currentAddress" placeholder="write your shipping address" data-validate='[{"notEmpty":[{"message":"Please write your address"}]}]'></textarea>
+				</div>
+				<div class="form-group">
+					<select class="form-control" name="shippingDivision" id="shippingDivision" data-ng-model="proceed.currentDivision" data-ng-change="proceed.getCurrentCityList(proceed.currentDivision);proceed.getShippingCost(proceed.currentDivision)" data-validate='[{"notEmpty":[{"message":"Please select division"}]}]'>
+					    <option value="">Select Division</option>
+					    <option data-ng-repeat="(k,vl) in divisionList" value="{{k}}">{{vl}}</option>
+					</select>
+					<div class="text-danger" data-ng-if="proceed.shippingMsg">{{ proceed.shippingMsg }}</div>
+				</div>
+				<div class="form-group">
+				    <select class="form-control" name="shippingCity" id="shippingCity" data-ng-model="proceed.currentCity" data-ng-change="proceed.getShippingCost(proceed.currentDivision,proceed.currentCity)" data-validate='[{"notEmpty":[{"message":"Please select city"}]}]'>
+					    <option value="">Select City</option>
+					    <option data-ng-repeat="(key,val) in proceed.currentCityListOptions" value="{{key}}" data-ng-selected="proceed.currentCity == key">{{val}}</option>
+					</select>
+				</div>
+				<div class="form-group">
+				   <input class="form-control" type="text" name="shippingZip" data-ng-model="proceed.currentZip" placeholder="Zip Code" data-validate='[{"notEmpty":[{"message":"Please input your zip code"}]}]'>
+				</div>
+				 
+				<div class="form-group">
+				    <input class="form-control" type="text" name="shippingCell" data-ng-model="proceed.cell" placeholder="phone" data-validate='[{"notEmpty":[{"message":"Please input your phone number"}]}]'>
+				</div>
+			</div>
+		</div>
+		</form>
+	</div>
+</div>
+</div>
+</div>
+</div>
+

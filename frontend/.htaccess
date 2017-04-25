@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+  SetEnv HTTP_MOD_REWRITE On
+  RewriteEngine On
+  Options FollowSymLinks
+  
+  RewriteBase /
+  
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)$ /#/$1 [L]
+  </IfModule>

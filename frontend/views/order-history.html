@@ -1,0 +1,82 @@
+<div class="container">  
+    <div class="wraper-inner">      
+        <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10">
+        <h2>{{ langsArr[langsName].recentOrderList}}</h2>
+        <div class="dashBox dash-tab" data-ng-if="orderHistory.merchantLoading !== true">
+          <div data-ng-if="orderHistory.messageFlag == true" class="alert alert-{{orderHistory.messageStatus}}">{{orderHistory.message}}</div>          
+          <div class="row">
+            <div class="col-md-12">
+              <ul class="nav histry nav-tabs tabs orderListTab">
+                <li id="tabs-ordered" data-ng-click="orderHistory.showTab('ordered')" data-ng-class="{'active': orderHistory.order_status=='ordered'}">
+                  <span>{{ langsArr[langsName].recentOrderList}}</span>
+                </li>
+                <li id="tabs-processing" data-ng-click="orderHistory.showTab('processing')" data-ng-class="{'active': orderHistory.order_status=='processing'}">
+                  <span>{{ langsArr[langsName].underProcessing}}</span>
+                </li>
+                <li id="tabs-completed" data-ng-click="orderHistory.showTab('completed')" data-ng-class="{'active': orderHistory.order_status=='completed'}">
+                  <span>{{ langsArr[langsName].completed}}</span>
+                </li>
+                <li id="tabs-cancelled" data-ng-click="orderHistory.showTab('cancelled')" data-ng-class="{'active': orderHistory.order_status=='cancelled'}">
+                  <span>{{ langsArr[langsName].cancelled}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Tab panes -->
+          <div class="row">
+            <div class="col-md-12 order-list-table" >
+              <div class="tab-pane active table-responsive management " id="ordered">
+                <table class="table table-bordered table-hover table-striped" data-ng-if="(orderHistory.historyData.length !== 0)">
+                  <thead>
+                  <tr>
+                    <th>{{ langsArr[langsName].sl}}</th>
+                    <th>{{ langsArr[langsName].invoiceNo}}</th>
+                    <th>{{ langsArr[langsName].status}}</th>
+                    <th>{{ langsArr[langsName].paymentStatus}}</th>
+                    <th>{{ langsArr[langsName].orderDate}}</th>
+                    <th>{{ langsArr[langsName].action}}</th>
+                  </tr>
+                  </thead>
+
+                  <tbody >
+                  <tr data-ng-repeat="ordered_data in orderHistory.historyData">
+                  
+                    <td>
+                      {{$index+1}}  
+                    </td>
+                    <td>{{ordered_data.ProductOrder.id}}</td>
+                    <td>
+                      {{ordered_data.ProductOrder.status}}
+                    </td>
+                    <td>
+                      {{ordered_data.ProductOrder.payment_status}}
+                    </td>
+
+                    <td>
+                      {{ordered_data.ProductOrder.order_date}}
+                    </td>
+                    <td>
+                      <a href="{{bootPoint}}order/{{ordered_data.ProductOrder.id}}/view"
+                         class="btn-search">View</a>
+                    </td>
+                  </tr>
+                  </tbody>
+
+                </table>
+                <h3 class=" text-warning text-left" data-ng-if="(orderHistory.historyData.length === 0)">{{ langsArr[langsName].dataNotFound}}</h3>
+              </div>
+            </div>
+            
+          </div>
+        </div>
+        <div class="uy-pagination">
+				<uib-pagination data-ng-if="orderHistory.totalItems > 15" items-per-page="itemsPerPage" ng-change="orderHistory.pageChanged(currentPage)" total-items="orderHistory.totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+			</div> 
+      </div>
+      </div>
+      </div>
+      </div>
+		 
+

@@ -1,0 +1,129 @@
+<div class="col-xs-12 col-sm-8 col-md-9">
+	<div class="row">
+		<form data-ng-submit="addToCart($event)">
+		 	 <input type="hidden" name="productId" value="{{ productDatas.Product.id }}">
+            <input type="hidden" name="productTitle" value="{{ productDatas.Product.title }}">
+            <input type="hidden" name="productBasePrice" value="{{ productDatas.Product.price }}">
+            <input type="hidden" id="inc-{{ productDatas.Product.id }}" data-ng-value="{{ addedCartItems[productDatas.Product.id].productQuantity ? addedCartItems[productDatas.Product.id].productQuantity : 1 }}" min="1" name="productQuantity">
+            <input type="hidden" name="productUnit" data-ng-if="productDatas.Product.unit" value="{{productDatas.Product.quantity}} {{productDatas.Product.unit}}" />
+			<div class="col-xs-12 col-sm-6 col-md-5">
+			   <div class="picZoomer">
+			   		<input type="hidden" id="hiddenImgUrl" name="imgUrl" value="{{imgUrl}}products/{{productDatas.ProductImage[0].id}}.{{productDatas.ProductImage[0].extension}}">
+			        <img data-ng-src="{{imgUrl}}products/{{productDatas.ProductImage[0].id}}.{{productDatas.ProductImage[0].extension}}" alt="{{productDatas.Product.title}}" class="img-responsive">
+			    </div>
+				 
+			   <!--  <ul class="piclist">
+			        <li><img src="images/product-bed-02.jpg" alt="product"></li>
+			        <li><img src="images/product-bed.jpg" alt="product"></li>
+			    </ul> -->
+			    <ul class="piclist">
+			        <li data-ng-repeat="productImg in productDatas.ProductImage">
+			        	<img data-ng-src="{{imgUrl}}products/{{productImg.id}}.{{productImg.extension}}" alt="{{productDatas.Product.title}}">
+			        </li>
+			    </ul>
+			</div>
+			
+			<div class="col-xs-12 col-sm-6 col-md-7">
+			  <div class="details-content">
+			       <h2>{{productDatas.Product.title}}</h2>
+			  <span class="product-code"> {{productDatas.Product.title}} </span>
+			  <h3 class="price"> {{currencySymbol}} {{replaceNumber(productDatas.Product.price,langsName)}}</h3>
+			  <p>
+				{{productDatas.Product.short_description}}
+			</p>
+			<div class="row">
+			    
+			<div class="col-xs-12 col-sm-4 col-md-3">
+			   <label>Quantity</label>
+			</div>
+			<div class="col-xs-12 col-sm-8 col-md-9">
+			  <div class="productQuantity"> <a data-ng-click="decreamentQty(productDatas.Product.id)" class="decrease" href="javascript:void(0)">-</a> <input type="text" readonly="" name="productQuantity" data-ng-model="inc" min="1" value="1" class="ng-pristine ng-valid ng-not-empty ng-touched" style=""> <a data-ng-click="increamentQty(productDatas.Product.id)" class="increase" href="javascript:void(0)">+</a> </div>
+			</div>
+			</div>
+			<div class="item-description">
+			    <h3>Item Description</h3>
+			    <table width="100%" cellspacing="0" cellpadding="0" border="0" class="tabtable">
+			   		<tbody>
+			   		<tr data-ng-repeat="productAttributes in productDatas.ProductAttribute">
+			            <td width="35%" class="bold">{{productDatas.Attribute[productAttributes.attribute_id]}}</td>
+			            <td width="65%">
+			            	<div class="form-select">
+				            	<select>
+				            		<option data-ng-repeat="attributeValue in productAttributes.ProductAttributeValue" value="{{productDatas.AttributeValue[attributeValue.attribute_value_id]}}">
+				            			{{productDatas.AttributeValue[attributeValue.attribute_value_id]}}
+				            		</option>
+				            	</select>
+			            	</div>
+			            </td>
+			        </tr>
+			 		 
+			    </tbody></table>
+			</div>
+			<div class="countWrapper">
+			    <button type="submit" class="btn"><i class="grocer-icon icon-basket-1"></i> কার্টে যোগ করুন</button>
+			     <button type="submit" class="btn btn-wishlist"><i class="grocer-icon icon-ok-1"></i> প্রিয় তালিকা  -এ যোগ করুন </button>
+			</div>
+			  </div>
+			</div>
+		</form>
+	</div>
+	 <div class="related-products">
+	    <h3>Related Products</h3>
+	    <div class="row">
+	        <div class="col-xs-12 col-sm-4 col-md-4">
+	            <div class="productBox">
+	          <div class="product-img"><img alt="Product" src="images/product-bed.jpg" class="img-responsive center-block"></div>
+	            <div class="boxContents">
+	              <p>$360/kg</p>
+	              <h2>fresh organic fuji apples</h2>
+	            </div>
+	            <div class="addCart"><i class="grocer-icon icon-basket-1"></i> add to cart</div>
+	            <div class="product-overlay">
+	              <i class="grocer-icon icon-crop"></i>
+	              <p>view details</p>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-xs-12 col-sm-4 col-md-4">
+	            <div class="productBox">
+	          <div class="product-img"><img alt="Product" src="images/product-bed-02.jpg" class="img-responsive center-block"></div>
+	            <div class="boxContents">
+	              <p>$360/kg</p>
+	              <h2>fresh organic fuji apples</h2>
+	            </div>
+	            <div class="addCart"><i class="grocer-icon icon-basket-1"></i> add to cart</div>
+	            <div class="product-overlay">
+	              <i class="grocer-icon icon-crop"></i>
+	              <p>view details</p>
+	            </div>
+	          </div>
+	        </div>
+	        <div class="col-xs-12 col-sm-4 col-md-4">
+	            <div class="productBox">
+	          <div class="product-img"><img alt="Product" src="images/product-bed.jpg" class="img-responsive center-block"></div>
+	            <div class="boxContents">
+	              <p>$360/kg</p>
+	              <h2>fresh organic fuji apples</h2>
+	            </div>
+	            <div class="addCart"><i class="grocer-icon icon-basket-1"></i> add to cart</div>
+	            <div class="product-overlay">
+	              <i class="grocer-icon icon-crop"></i>
+	              <p>view details</p>
+	            </div>
+	          </div>
+	        </div>
+	    </div>
+	</div>
+</div>
+
+<script type="text/javascript">
+    $(function() {
+            $('.picZoomer').picZoomer();
+            $('.piclist li').on('click',function(event){
+                var $pic = $(this).find('img');
+                $('.picZoomer-pic').attr('src',$pic.attr('src'));
+                $('#hiddenImgUrl').attr('value',$pic.attr('src'));
+                
+            });
+        });
+</script>

@@ -1,0 +1,43 @@
+<div class="container">  
+    <div class="wraper-inner">      
+		<div class="row">
+        	<div class="col-xs-12 col-md-10 col-md-offset-1">
+				<div class="wish-list">
+					<h2 class="reviewHeadingBig"> {{ langsArr[langsName].wishList }}</h2> 
+					<div class="{{wishlist.messageClass}}" data-ng-if="wishlist.showMessage">{{ langsArr[langsName].dataNotFound }}</div>
+					<div class="table-responsive">
+						<table class="table wishTable">
+							<tbody>
+								<tr data-ng-repeat="product in wishlist.wishListProductList" id="{{product.Wishlist.id}}">
+									<td>
+									 	<a data-ng-href="{{bootPoint}}details/{{product.Product.slug}}"><img alt="{{product.Product.title}}" data-ng-src="{{imgUrl}}products/{{product.ProductImage[0].id}}.{{product.ProductImage[0].extension}}" class="review-img"></a>
+									</td>
+									<td class="reviewDescription">
+										<h4>
+										<a class="fontbold" data-ng-href="{{bootPoint}}details/{{product.Product.slug}}">{{product.Product.title}}</a>
+										</h4>
+										<p>{{product.Product.short_description}}</p>
+									</td>
+									<td>
+										<a data-ng-href="{{bootPoint}}details/{{product.Product.slug}}" class="btn btn-cart-wish" type="button"><i class="grocer-icon icon-crop"></i> {{ langsArr[langsName].viewDetails}} </a>
+									</td>
+									<td class="text-center">
+										<p class="price">{{product.Product.price}}</p>
+									</td>
+									<td class="text-center">
+										<a href="javascript:void(0)" class="cancel-wish" data-ng-click="wishlist.removeWishlist(product.Wishlist.id)"><i class="grocer-icon icon-cancel"></i></a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="uy-pagination">
+						<uib-pagination data-ng-if="wishlist.totalItems > 15" items-per-page="itemsPerPage" ng-change="wishlist.pageChanged(currentPage)" total-items="wishlist.totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+					</div>   
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+ 

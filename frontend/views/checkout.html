@@ -1,0 +1,46 @@
+<div class="col-sm-8 col-md-9">
+    <div class="min-height">
+        <h1>Product Order Process</h1>
+        <ul class="proceed-list">
+            <li class="active"><i class="icon-location-outline" aria-hidden="true"></i></li>
+            <li class="active"><i class="icon-delivery" aria-hidden="true"></i></li>
+            <li class="active"><i class="icon-cards-payment" aria-hidden="true"></i></li>
+            <li class="active"><i class="icon-confirmation" aria-hidden="true"></i></li>
+        </ul>
+        <div class="alert {{checkout.messageClass}}" data-ng-if="checkout.showMessage">{{checkout.showMessage}}</div>
+        <!-- Fourth Form Delivery -->
+        <div class="col-xs-12 col-md-5 col-md-push-7">
+            <div class="purchaseDetails">
+                <P class="head">
+                    your purchase
+                </P>
+                <P>
+                	<span>Sub Total</span>
+                	<span>
+                		{{currencySymbol}} {{replaceNumber(checkout.subTotal,langsName)}}
+                	</span>
+                </P>
+                <P><span>Delivery Charge</span><span>{{currencySymbol}} {{replaceNumber(shippingCharge,langsName)}}</span></P>
+                <P class="total"><span>Total</span><span>{{currencySymbol}} {{replaceNumber(checkout.grandTotal,langsName)}}</span></P>
+               <!--  <P><span>Special Code</span> <span><a href="#">Apply</a></span></P> -->
+            </div>
+        </div>
+        <div class="col-xs-12 col-md-7 col-md-pull-5">
+            <form class="proceedForm confirm" data-ng-submit="checkout.orderFn()" name="orderFrm" id="orderFrm">
+                <div class="col-xs-12 col-sm-12">
+                    <textarea class="form-control" name="confirmAdd" readonly="readonly">{{checkout.orderData.proceed.address}}</textarea>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <input class="form-control" type="text" name="confirmTime" readonly="readonly" value="{{checkout.orderData.delivery.date}} {{checkout.orderData.delivery.time}}">
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <input class="form-control" type="text" name="payMethod" readonly="readonly" data-ng-value="'{{checkout.orderData.payment.payMethod}}' == 'cod' ?  'Cash on delivery' : '{{checkout.orderData.payment.payMethod}}'">
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <button class="btn" type="submit">confirm order</button>
+                </div>
+            </form>
+        </div>
+        <div data-ng-bind-html="checkout.hiddenForm"></div>
+    </div>
+</div>

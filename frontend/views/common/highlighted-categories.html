@@ -1,0 +1,20 @@
+<!--highlighted category -->
+<div class="container">
+	<div class="featuredgrid">
+		<!-- <h2 class="sub-heading">{{ langsArr[langsName].featuredCategory }}</h2> -->
+      
+		<div class="row">
+	      	<div data-ng-repeat="featured in main.featuredCats" class="col-xs-12 col-sm-3 col-md-3">
+	        <div  class="featured-panel">
+	        <img ng-src="{{main.ImgUrl}}product_categories/{{featured.Category.id}}.{{featured.CategoryImage.image_extension}}" alt="categories">
+		            <div class="panel-info">
+		              <h3>{{featured.Category.title}}</h3>
+		            </div>
+		            <a class="hover-info" data-ng-href="{{bootPoint}}single-category/{{featured.Category.slug}}"><span>{{ langsArr[langsName].shop }} {{featured.Category.title}}</span></a>
+		          </div>
+	        </div>
+		</div>
+	</div>
+</div>
+    
+<!-- highlighted category -->

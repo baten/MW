@@ -1,0 +1,129 @@
+<div class="modal fade product-modal" id="productModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="modal-body">
+       <div class="row">
+      <form data-ng-submit ="addToCart($event,$window);" id="addToCartForm">
+				<!-- product image and zoomer -->
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="picZoomer">
+				   		<input type="hidden" id="hiddenImgUrl" name="imgUrl" value="{{imgUrl}}products/{{productDatas.ProductImage[0].id}}.{{productDatas.ProductImage[0].extension}}">
+				        <img data-ng-src="{{imgUrl}}products/{{productDatas.ProductImage[0].id}}.{{productDatas.ProductImage[0].extension}}" alt="{{productDatas.Product.title}}" class="img-responsive picZoomer-pic">
+			    	</div>
+				    <ul class="piclist">
+				        <li data-ng-click="updateThumb($event)" data-ng-repeat="productImg in productDatas.ProductImage">
+				        	<img data-ng-src="{{imgUrl}}products/{{productImg.id}}.{{productImg.extension}}" alt="{{productDatas.Product.title}}">
+				        </li>
+				    </ul>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-6">
+					<div class="details-content">
+						<!-- size guide modal -->
+                          	<div class="size-details table-responsive" style="display:none;">
+                           	<span data-ng-click="toggleSize()">CLOSE</span>
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Size</th>
+										<th>Collar</th>
+										<th>Length</th>
+										<th>Chest</th>
+										<th>Sleeve</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Small</td>
+										<td>14.5</td>
+										<td>27</td>
+										<td>38</td>
+										<td>23</td>
+									</tr>
+									<tr>
+										<td>Medium</td>
+										<td>14.5</td>
+										<td>27</td>
+										<td>38</td>
+										<td>23</td>
+									</tr>
+									<tr>
+										<td>Large</td>
+										<td>14.5</td>
+										<td>27</td>
+										<td>38</td>
+										<td>23</td>
+									</tr>
+								  
+								</tbody>
+							</table>
+    							</div>
+    							<!-- product info -->
+						<h2>{{productDatas.Product.title}}</h2>
+						<h3 class="price" data-ng-if="productDatas.Product.options < 1"> 
+							{{currencySymbol}}{{replaceNumber(showCurrencyValue(productDatas.Product.price,currency.CurrencyValue.value),langsName)}}
+						</h3>
+						<h3 class="price" data-ng-if="productDatas.Product.options > 0"> 
+							<small>{{currencySymbol}}{{replaceNumber(showCurrencyValue(productDatas.Product.price,currency.CurrencyValue.value),langsName)}}</small>
+							<span>{{currencySymbol}}{{replaceNumber(showCurrencyValue(productDatas.Product.sale_price,currency.CurrencyValue.value),langsName)}}</span>
+						</h3>
+
+						<div class="row">
+							<div class="col-xs-12 col-sm-4 col-md-6" data-ng-repeat="attributeData in productDatas.Attribute">
+								<div class="form-select product-attribute">
+                                  <select name="attribute.{{attributeData.Attribute.title}}"  class="combination" data-ng-if="attributeData.Attribute.useCombination === true" data-ng-model="attribute" data-ng-change="getAvailableStock(productDatas.Product.id)" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].pleaseSelect}} {{detail.productDatas.Attribute[productAttributes.attribute_id]}}"}]}]'>
+                                  		<option value="">{{attributeData.Attribute.title}}</option>
+					            		<option data-ng-repeat="attributeValue in attributeData.AttributeValue" data-ng-if="$root.ProductAttrVal[attributeValue.id]" value="{{attributeValue.value}}" data-attrvalid="{{attributeValue.id}}">
+					            			{{attributeValue.value}}
+					            		</option>
+					            	</select>
+					            	<select name="attribute.{{attributeData.Attribute.title}}" class="combinationFree" data-ng-if="attributeData.Attribute.useCombination === false" data-ng-model="attribute" data-ng-change="getAvailableStock(productDatas.Product.id)" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].pleaseSelect}} {{detail.productDatas.Attribute[productAttributes.attribute_id]}}"}]}]'>
+                                  		<option value="">{{attributeData.Attribute.title}}</option>
+					            		<option data-ng-repeat="attributeValue in attributeData.AttributeValue" data-ng-if="$root.ProductAttrVal[attributeValue.id]" value="{{attributeValue.value}}" data-attrvalid="{{attributeValue.id}}">
+					            			{{attributeValue.value}}
+					            		</option>
+					            	</select>
+                               	</div>
+							</div> 
+							<div class="col-xs-12 col-sm-8 col-md-6">
+								<div class="productQuantity"> 
+									<a data-ng-click="decreamentQty(productDatas.Product.id)" class="decrease" href="javascript:void(0)">-</a>
+							   		<input type="text" id="productQuantity" name="productQuantity" value="{{inc}}" min="1" class="ng-pristine ng-valid ng-not-empty ng-touched"> 
+							   		<a data-ng-click="increamentQty(productDatas.Product.id)" class="increase" href="javascript:void(0)">+</a> 
+							   	</div>
+							</div>
+							<div class="col-xs-12 col-sm-8 col-md-6">
+								<a class="show-guide" href="javascript:void(0)" data-ng-click="toggleSize()">Size guide</a>
+							</div>
+							 
+						</div>
+						
+						<!-- <ul class="piclist">
+					        <li data-ng-click="updateThumb($event)" data-ng-repeat="productImg in productDatas.ProductImage" data-ng-if="$index<=4">
+					        	<img data-ng-src="{{imgUrl}}products/{{productImg.id}}.{{productImg.extension}}" alt="{{productDatas.Product.title}}">
+					        </li>
+				    	</ul> -->
+				    	<label id="stockQuantity" class="hide">{{stockQuantity >= 1 ? stockQuantity : 0}}</label>
+				    	<input type="hidden" id="addedQuantity" name="addedQuantity" data-ng-model="addedInProductQuantity">
+						<input type="hidden" name="productId" data-ng-value="productDatas.Product.id">
+						<input type="hidden" name="stockId" data-ng-value="stockId">
+			            <input type="hidden" name="productTitle" data-ng-value="productDatas.Product.title">
+			            <input type="hidden" name="productSlug" data-ng-value="productDatas.Product.slug">
+			            <input data-ng-if="productDatas.Product.options < 1" type="hidden" name="productBasePrice"  data-ng-value="productDatas.Product.price">
+			            <input data-ng-if="productDatas.Product.options > 0" type="hidden" name="productBasePrice"  data-ng-value="productDatas.Product.sale_price">
+						<div class="cart-btn-group">
+							<button type="submit" class="btn "><i class="grocer-icon icon-basket-1"></i> {{ langsArr[langsName].addToCart }}</button>								 
+						</div>
+                              
+					</div>
+				</div>
+			</form>
+    </div>
+
+      </div>
+      
+    </div>
+  </div>
+</div>

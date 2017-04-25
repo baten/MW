@@ -1,0 +1,74 @@
+<div class="side-nav">
+	<h3 data-ng-bind="shopCategoryList.Category.title"></h3>
+	<ul data-ng-if="shopCategoryList.ChildCategory">
+		<li data-ng-repeat="category in shopCategoryList.ChildCategory" data-ng-class="singleCat.categorySlug == category.slug?'selected':''">
+			<a data-ng-href="{{bootPoint}}single-category/{{category.slug}}" data-ng-if="!singleCat.lastChild">{{category.title}}</a>
+			<a data-ng-href="{{bootPoint}}sub-category/{{shopCategoryList.Category.slug}}/{{category.slug}}" data-ng-if="singleCat.lastChild">{{category.title}}</a>
+		</li>
+	    <!-- <li class="selected"><a href="#">Clothing</a></li> -->
+	</ul>
+</div>
+<!-- filtering by team start-->
+<div data-ng-if="hashparams == 'single-category'" >
+	<div class="product-attribute" data-ng-if="teamList"> 
+		<h3>Team</h3>
+		<ul>
+			<li data-ng-repeat="(key,value) in teamList"> 
+				 <div class="checkbox">
+					<label>
+					   <input type="checkbox" id="{{key}}" class="teamCheckBox" data-teamId="{{key}}" data-ng-click="filterByAttr()">
+						{{value}}
+					 </label>
+				 </div>
+			 </li>
+		</ul>
+	</div>
+</div>
+<!-- filtering by team start-->
+
+<!-- filtering by price start-->
+<div data-ng-if="hashparams == 'single-category' && singleCat.totalItems !== false">
+	<div class="filter-color">
+	<h3 >Price <span class="pull-right grocer-icon icon-minus" data-ng-click="priceToggle($event)"></span></h3>
+
+		<rzslider class="price-range" rz-slider-model="singleCat.slider.minValue"
+          rz-slider-high="singleCat.slider.maxValue"
+          rz-slider-options="singleCat.slider.options"></rzslider>
+           
+</div>
+</div>
+<!-- filtering by price end-->
+
+<!-- filering by color attributes start -->
+<div class="filter-color" data-ng-repeat="attribute in attributeList" data-ng-if="attribute.AttributeValue.length > 0 && attribute.Attribute.id =='1'">
+	<h3>{{attribute.Attribute.title}}<span class="pull-right grocer-icon icon-angle-up" data-ng-click="colorToggle($event)"></span></h3>
+	<ul>
+		<li data-ng-repeat="attributeValue in attribute.AttributeValue" style="background-color:{{attributeValue.value |  lowercase}};">
+			<input type="radio" name="color" id="{{attributeValue.id}}" class="attrCheckBox" data-attrId="{{attribute.Attribute.id}}" data-attrValue="{{attributeValue.id}}"  data-ng-click="filterByAttr()">
+		</li>
+	</ul>
+</div>
+<!-- filering by color attributes end -->
+
+ <!-- filtering by attributes start-->
+<div data-ng-if="hashparams == 'single-category'">
+	<div class="product-attribute" data-ng-repeat="attribute in attributeList" data-ng-if="attribute.AttributeValue.length > 0 && attribute.Attribute.id !='1'"> 
+		<h3 data-ng-bind="attribute.Attribute.title"></h3>
+		<ul data-ng-if="attribute.AttributeValue !=''">
+			<li data-ng-repeat="attributeValue in attribute.AttributeValue"> 
+				 <div class="checkbox">
+					<label>
+					   <input type="checkbox" id="{{attributeValue.id}}" class="attrCheckBox" data-attrId="{{attribute.Attribute.id}}" data-attrValue="{{attributeValue.id}}" data-ng-click="filterByAttr()">
+						{{attributeValue.value}}
+					 </label>
+				 </div>
+			 </li>
+		</ul>
+	</div>
+</div>
+ <!-- filtering by attributes end-->
+ 
+
+
+
+

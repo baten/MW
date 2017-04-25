@@ -1,0 +1,150 @@
+  <div class="container">
+    <div class="wraper-inner">
+      <div class="row">
+      <div class="col-sm-12 col-md-12 customTable">
+        <div data-ng-show="order.OrderConfirmationData">
+			<h3 class=" reviewHeadingBig text-center alert alert-danger" data-ng-if="order.OrderConfirmationData.paymentStatus !== 'OK' && order.shippingDetails.payment.payMethod != 'cod'">Payment not complete yet.</h3>
+		</div>
+		 	<div class="pdfcontainer">
+      		<a target="_blank" data-ng-href="{{order.host}}ecommerce/product_orders/order_view/{{order.OrderConfirmationData.orderId}}/pdf" class="btn btn-warning yellow button button-theme-danger pull-right">
+      			<i class="icon-file-pdf"></i>PDF
+      		</a>
+      	</div>
+        <div class="odrDtls row">
+          <div class="odrDtlsIn col-md-12">
+         
+            <h2 class="heading reviewHeadingBig">{{ langsArr[langsName].orderConfirmation}}</h2>
+			<h3 data-ng-if=" ((order.from !== 'view') && (order.OrderConfirmationData.paymentStatus == 'OK' || order.shippingDetails.payment.payMethod == 'cod')) " class=" text-center alert alert-success">Thanks for
+              your order! An email has
+              been also sent to you.</h3>
+            <div class="row">
+              <div class="col-sm-6">
+                <table class="table text-capitalize">
+                  <tbody><tr>
+                    <th colspan="2">{{ langsArr[langsName].shippingAddress}}</th>
+                  </tr>
+                  <tr>
+                    <td>Receiver:</td>
+                    <td>{{order.shippingDetails.fname}} {{order.shippingDetails.lname}}</td>
+                  </tr>
+                  <tr>
+                    <td>{{ langsArr[langsName].phone}}:</td>
+                    <td data-ng-bind="order.shippingDetails.phone"></td>
+                  </tr>
+                  <tr>
+                    <td>{{ langsArr[langsName].addressLine1}}:</td>
+                    <td data-ng-bind="order.shippingDetails.address_line_1"></td>
+                  </tr>
+                  <tr>
+                    <td>{{ langsArr[langsName].addressLine2}}:</td>
+                    <td data-ng-bind="order.shippingDetails.address_line_2"></td>
+                  </tr>
+                 <!--  <tr>
+                    <td>{{ langsArr[langsName].city}}:</td>
+                    <td >{{order.shippingDetails.city}}</td>
+                  </tr> -->
+                  <tr>
+                    <td>{{ langsArr[langsName].city}}:</td>
+                    <td >{{order.shippingDetails.state}}</td>
+                  </tr>
+                   <tr>
+                    <td>{{ langsArr[langsName].country}}:</td>
+                    <td >{{order.shippingDetails.country}}</td>
+                  </tr>
+                </tbody></table>
+              </div>
+              <div class="col-sm-6">
+                <table class="table">
+                  <tbody><tr>
+                    <th colspan="2">Invoice</th>
+                  </tr>
+                  <tr>
+                    <td>Invoice Number</td>
+                    <td >{{order.OrderConfirmationData.orderId}}</td>
+                  </tr>
+                  <tr>
+                    <td>Invoice Date</td>
+                    <td >{{order.OrderConfirmationData.orderDate}}</td>
+                  </tr>
+                  
+                  <tr data-ng-if="order.shippingDetails.paymentMethod === 'cod'">
+                    <td>Payment type</td>
+                    <td class="text-danger" >Cash On Delivery</td>
+                  </tr>
+                  <tr data-ng-if="order.shippingDetails.paymentMethod !== 'cod'">
+                    <td>Payment Status</td>
+                    <td>
+                    	<div data-ng-if="order.OrderConfirmationData.paymentDetail.card_type">
+                    		{{order.OrderConfirmationData.paymentDetail.card_type}}
+                    	</div>
+                    	<div data-ng-if="order.OrderConfirmationData.paymentStatus === 'OK'">
+                    		Payment OK
+                    	</div>
+                    	 <div data-ng-if="order.OrderConfirmationData.paymentStatus !== 'OK'" class="text-danger">
+                    		Payment Failed
+                    	</div>
+                    </td>
+                  </tr>
+                </tbody></table>
+              </div>
+            </div>
+          </div>
+ 		<div class="odrDtlsIn col-md-12  ng-scope" style="">
+            <div class="row">
+              <div class="col-md-12">
+                <h2 class="heading">Product Summery</h2>
+
+                <div class="table-responsive">
+                  <table class="table ">
+                    <tbody><tr class="info">
+                      <th>Product</th>
+                      
+                      <th class="text-center">Unit Price</th>
+                      <th class="text-center">Quantity</th>
+                      <th class="text-right">Sub Total</th>
+                    </tr>
+
+           			<tr data-ng-repeat="products in order.OrderConfirmationData.orderDetails.cart">
+                      <td width="40%"> {{products.productTitle}}   </td>
+                      
+                      <td class="text-center">{{replaceNumber(products.productBasePrice,langsName)}}</td>
+                      <td class="text-center">{{replaceNumber(products.productQuantity,langsName)}}</td>
+                      <td align="right">{{replaceNumber(products.productBasePrice * products.productQuantity,langsName)}}
+                      	<input type="hidden" class="total_cost" value="{{products.productBasePrice * products.productQuantity}}"/>
+                      </td>
+                    </tr> 
+					<tr>
+                      <td colspan="3" class="text-right"><strong>Shipping Cost</strong></td>
+                      <td colspan="1"  class="text-right"><strong> 
+                        {{replaceNumber(order.shippingCost,langsName)}}</strong>
+                      </td>
+                    </tr>
+                  <tr data-ng-if="order.OrderConfirmationData.orderDetails.discount > 0">
+                  	<td colspan="3" class="text-right"><strong>Discount</strong></td>
+                  	<td colspan="1"  class="text-right"><strong> 
+                        {{replaceNumber(order.OrderConfirmationData.orderDetails.discount,langsName)}}</strong>
+                      </td>
+                  </tr>
+                    <tr style="background-color: #ea6153;color: white;">
+                      <td class="text-right" colspan="3"><strong>Payable Amount</strong></td>
+                      <td colspan="1" class="text-right"><strong>{{currencySymbol}} {{replaceNumber(order.grandTotal(order.shippingCost,order.OrderConfirmationData.orderDetails.discount),langsName)}}</strong>
+                      </td>
+                    </tr>
+
+                  </tbody></table>
+                </div>
+
+              </div>
+            </div>
+          </div><!-- end ngIf: OrderConfirmationData.isOffer -->
+
+
+
+          <!-- ngIf: !OrderConfirmationData.isOffer -->
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+ 
+

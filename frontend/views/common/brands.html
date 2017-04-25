@@ -1,0 +1,15 @@
+<div class="container">
+	<div class="home-clients">
+    	<!-- <h2 class="sub-heading">{{ langsArr[langsName].brand }}</h2> -->
+        <section class="clients">
+          <div class="row">
+            <!-- brand list-->
+            <div class="col-xs-12 col-sm-4 col-md-3" data-ng-if="brandList" data-ng-repeat="brand in brandList">
+              <div class="clients-list">
+                <div class="clients-logo wow zoomIn animated"> <a data-ng-href="{{bootPoint}}single-brand/{{brand.Brand.slug}}"><img class="img-responsive" data-ng-src="{{main.ImgUrl}}product_brands/l-{{brand.Brand.id}}.{{brand.Brand.logo_extension}}" alt="{{brand.Brand.title}}"/></a></div>
+              </div>
+            </div>
+          </div>
+        </section>
+   </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container">  
+    <div class="wraper-inner">      
+        <div class="row ">
+<div class="col-xs-12 col-sm-10 col-sm-offset-1 col-md-offset-2 col-md-8">
+    <div class="login-process-area">
+    		<div class="alert alert-success" data-ng-if="welcomeMessage">{{profile.welcomeMessage}}</div>
+        	<div class="col-xs-12 col-sm-12 col-md-7 customformwrap prof">
+        	<h1 class="head custprof">{{ langsArr[langsName].updateProfile }}</h1>
+        	<div data-ng-if="profile.profileUpdateMessage" class="alert alert-success text-center">{{ langsArr[langsName].profileUpdateMessage }}</div>
+            <form class="proceedForm signUp" data-ng-submit="profile.updateProfile()" id="updateProfileForm">
+                <div class="row">
+            	<div><label class="custombold">{{loggedUser.Client.username}}</label></div>
+               <div class="col-xs-12 col-sm-12">
+                    <input class="form-control" type="text" name="fname" placeholder="first name" value="{{loggedUser.details.fname}}" data-validate='[{"notEmpty":[{"message":"Please input your first name"}]}]'>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <input class="form-control" type="text" name="lname" placeholder="Last name" value="{{loggedUser.details.lname}}" data-validate='[{"notEmpty":[{"message":"Please input your last name"}]}]'>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <input class="form-control" type="text" name="phone" placeholder="phone" value="{{loggedUser.details.phone}}" data-validate='[{"notEmpty":[{"message":"Please input your cell no"}]}]'>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+	                <label>{{ langsArr[langsName].country }}</label><div class="error_messages user_country">{{ langsArr[langsName].pleaseSelect }} {{ langsArr[langsName].country }}</div>
+	                <selectize options='profile.countryListOptions' data-ng-model="profile.userCountry" id="user_country" name="user_country" config="{create: true,maxItems: 1,required: true}" ng-disabled="disable" data-ng-change="profile.getUserStateList(profile.userCountry);">
+	                </selectize>
+              	</div>
+            	 	<div class="col-xs-12 col-sm-12">
+             	  	<label>{{ langsArr[langsName].city }} </label><div class="error_messages user_state">{{ langsArr[langsName].pleaseSelect }} {{ langsArr[langsName].city }}</div>
+	                <selectize options='profile.userStateListOptions' id="userState" name="user_state" config="{create: true,maxItems: 1,required: true}" data-ng-model="profile.userState" ng-disabled="disable">
+	                </selectize>
+              	</div>
+                <div class="col-xs-12 col-sm-12">
+                	<textarea class="form-control" name="address_line_1" placeholder="{{ langsArr[langsName].addressLine1 }}">{{loggedUser.details.address_line_1}}</textarea>
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                	<textarea class="form-control" name="address_line_2" placeholder="{{ langsArr[langsName].addressLine2 }}">{{loggedUser.details.address_line_2}}</textarea>
+                </div>
+				 <div class="col-xs-12 col-sm-12">
+                	<label>{{ langsArr[langsName].region }}</label>
+                	<input class="form-control" type="text" name="region" placeholder="{{ langsArr[langsName].region }}" value="{{loggedUser.details.region}}">
+                </div>
+                 <div class="col-xs-12 col-sm-12">
+                	<label>{{ langsArr[langsName].poBox }}</label>
+                	<input class="form-control" type="text" name="poBox" placeholder="{{ langsArr[langsName].poBox }}" value="{{loggedUser.details.poBox}}">
+                </div>
+                <div class="col-xs-12 col-sm-12">
+                    <button class="btn" type="submit">{{ langsArr[langsName].updateProfile }}</button>
+                </div>
+            </form>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4 col-md-offset-1 customformwrap prof">
+			<h1 class="custprof">{{ langsArr[langsName].changePassword }}</h1>
+			<div data-ng-if="profile.passwordUpdateMessage" class="alert alert-success">{{profile.passwordUpdateMessage}}</div>
+			<form class="proceedForm signUp" data-ng-submit="profile.updatePassword(newPassword)" id="updatePasswordForm">
+                <div class="row">
+                    <div><label class="custombold2"></label></div>
+	              <div class="col-xs-12 col-sm-12">
+	              	
+	                  <input class="form-control" type="password" name="current_password" data-ng-model="currentPassword"
+                       data-ng-change="profile.checkCurrentPassword(currentPassword)"
+                       data-validate='[{"notEmpty":[{"message":"Please input your current password"}]}]' placeholder="{{ langsArr[langsName].currentPassword }}">
+                      <p class="alert-danger">{{profile.currentPasswordMessage}}</p>
+	              </div>
+	              <div class="col-xs-12 col-sm-12">
+	                  <input class="form-control" type="password" name="new_password" data-ng-model="newPassword"
+                       data-validate='[{"notEmpty":[{"message":"Please input your new password"}]}]' placeholder="{{ langsArr[langsName].newPassword }}">
+	              </div>
+	              <div class="col-xs-12 col-sm-12">
+	                  <input class="form-control" type="password" name="repassword"
+                       data-validate='[{"notEmpty":[{"message":"This field is required."}]},{"compairWith":[{"options":[{"compairField":"new_password"}]}, {"message":"Password does not match"}]}]' placeholder="{{ langsArr[langsName].confirmPassword }}">
+	              </div>
+	              <div class="col-xs-12 col-sm-12">
+	                  <button class="btn" type="submit">{{ langsArr[langsName].changePassword }}</button>
+	              </div>
+                  </div>
+			</form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+</div>

@@ -1,0 +1,94 @@
+<!-- <div class="container">  
+	<div class="wraper-inner"> 
+		<div class="row">
+			<div class="col-sm-4 col-md-3">
+				<nav class="left-menu menu-bar" >
+				    <ul data-ng-if="categoryData">
+				        <li data-ng-click="showTab($event)" data-ng-repeat="category in categoryData">
+				            <img src="images/food.60ffeab4.png" alt="Icon"> 
+				            <a data-ng-href="{{ bootPoint }}single-brand/{{singleBrand.brandSlug}}/{{ category.Category.slug }}">{{category.Category.title}}</a>
+				            <ul data-ng-if="category.children.length>0">
+				                <li class="childLi" data-ng-repeat="subCat in category.children" data-ng-click="showTab($event)">
+				                 <a data-ng-href="{{ bootPoint }}single-brand/{{singleBrand.brandSlug}}/{{ subCat.Category.slug }}">{{subCat.Category.title}}</a>
+				                    <ul data-ng-if="subCat.children.length>0">
+				                        <li class="childLi" data-ng-repeat="subChildCat in subCat.children">
+				                        <a data-ng-href="{{ bootPoint }}single-brand/{{singleBrand.brandSlug}}/{{ subChildCat.Category.slug }}">{{subChildCat.Category.title}}</a>                            
+				                        </li>
+				                    </ul>
+				                </li>
+				            </ul>
+				        </li>
+				    </ul>
+				</nav>
+			</div> 
+			<div class="col-sm-8 col-md-9">
+			    <section class="product-container category">   
+			        	<div class="catTitle">
+			            <h1><span>{{ singleBrand.brandData.title }}</span></h1>
+			        </div>
+			        <div class="cat-short-des">
+			        	<P data-ng-bind-html="singleBrand.textToSafeHtml(singleBrand.brandData.description)"></p>
+			            <img data-ng-if="singleBrand.brandData.image_extension" data-ng-src="{{imgUrl}}product_brands/{{singleBrand.brandData.id}}.{{singleBrand.brandData.image_extension}}">
+			        </div>
+			        product directive
+			        <div class="row">
+			            <div class="col-xs-12 col-sm-4 col-md-4" data-ng-repeat="(key,val) in singleBrand.shopProductList">
+			                <products product-obj="val" replace-number="replaceNumber(input,langs)" image-location="{{imgUrl}}products/" boot-point="{{ bootPoint }}"></products>
+			                <scroll></scroll>
+			            </div>
+			        </div> 
+					<div class="uy-pagination">
+						<uib-pagination data-ng-if="singleBrand.totalItems > 15" items-per-page="itemsPerPage" ng-change="singleBrand.pageChanged(currentPage)" total-items="singleBrand.totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+					</div>       
+			    </section>  
+			</div>
+		</div>
+</div>
+</div> -->
+<div class="container">  
+	<div class="wraper-inner"> 
+	<div class="loading" data-ng-if="singleBrand.brandLoading"><img src="images/loading.31feb317.gif" /></div>
+    	<!-- <img class="full-img" data-ng-if="!singleBrand.brandLoading"  data-ng-if="singleBrand.brandData.image_extension" data-ng-src="{{imgUrl}}product_brands/{{singleBrand.brandData.id}}.{{singleBrand.brandData.image_extension}}"> -->     
+		<div class="row">
+			<div class="col-sm-4 col-md-3">
+				<nav class="left-menu menu-bar" data-ng-if="categoryData">
+				    <ul>
+				        <li data-ng-click="showTab($event)" data-ng-repeat="category in categoryData">
+				            <a data-ng-href="{{ bootPoint }}single-brand/{{singleBrand.brandSlug}}/{{ category.Category.slug }}">{{category.Category.title}}</a>
+				            <ul data-ng-if="category.children.length>0">
+				                <li class="childLi" data-ng-repeat="subCat in category.ChildCategory" data-ng-click="showTab($event)"> 
+				                 <a data-ng-href="{{ bootPoint }}single-brand/{{singleBrand.brandSlug}}/{{ subCat.slug }}">{{subCat.title}}</a>
+				                    <ul data-ng-if="subCat.Childcat.length>0">
+				                        <li class="childLi" data-ng-repeat="subChildCat in subCat.Childcat">
+				                        <a data-ng-href="{{ bootPoint }}single-brand/{{singleBrand.brandSlug}}/{{ subChildCat.slug }}">{{subChildCat.title}}</a>                            
+				                        </li>
+				                    </ul>
+				                </li>
+				            </ul>
+				        </li>
+				    </ul>
+				</nav>
+			</div> 
+			<div class="col-sm-8 col-md-9">
+				<section class="product-container category">   
+					<div class="row" >
+						<div data-ng-repeat="(ky,vl) in singleBrand.shopProductList.Product" data-ng-hide="ky > 0" id="div-id-{{ky}}" >
+							<div class="col-xs-12 col-sm-6 col-md-4" data-ng-repeat="(key,val) in vl">
+						    	<products product-obj="val" replace-number="replaceNumber(input,langs)" image-location="{{singleBrand.productImgUrl}}" boot-point="{{ bootPoint }}" currency-obj="currency" show-currency-value="showCurrencyValue(price,curPrice)"></products>
+							</div>
+						</div>
+						<!-- <p class="an-element" id="xy" in-viewport scrollPosition="0">Is
+							this element in viewport</p> -->
+					</div> 
+					<div class="uy-pagination">
+						<uib-pagination data-ng-if="singleCat.totalItems > 48" items-per-page="singleCat.itemsPerPage" ng-change="singleCat.pageChanged(currentPage)" total-items="singleCat.totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+					</div>       
+			    </section>  
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+
+<div class="col-sm-4 col-md-3" data-ng-include="'views/common/quick-view-modal.html'"></div> 

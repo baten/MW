@@ -1,0 +1,95 @@
+<div class="container">  
+    <div class="user-box">      
+        <div class="row">
+            <div class="col-md-6">
+             	<div class="customformwrap">
+					<div class="alert alert-danger" data-ng-if="login.showMessage">{{ langsArr[langsName].alreadyRegistered}}</div>
+						<form name="registrationFrm" data-ng-submit="login.guestCredentials()" id="registrationFrm">
+		            		<h1>{{ langsArr[langsName].guest }}</h1>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].fname }}<sup>*</sup></label>
+			                    <input class="form-control" type="text" name="fname" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].fname}}"}]}]'>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].lname }}<sup>*</sup></label>
+			                    <input class="form-control" type="text" name="lname" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].lname}}"}]}]'>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].eMail }}<sup>*</sup></label>
+			                    <input class="form-control" type="email" name="username" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].eMail}}"}]},{"email":[{"message":"{{langsArr[langsName].errorMessageValidPrefix}} {{langsArr[langsName].eMail}}"}]}]'>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].phone }}<sup>*</sup></label>
+			                    <input class="form-control" type="text" name="phone" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].phone}}"}]}]'>
+			                </div>
+			               <div class="form-group">
+				                <label>{{ langsArr[langsName].country }}</label><div class="error_messages user_country">{{ langsArr[langsName].pleaseSelect }} {{ langsArr[langsName].country }}</div>
+				                <selectize options='login.countryListOptions' data-ng-model="login.userCountry" id="user_country" name="user_country" config="{create: true,maxItems: 1,required: true}" ng-disabled="disable" data-ng-change="login.getUserStateList(login.userCountry);" Placeholder="Please select country">
+				                </selectize>
+			              	</div>
+		             	 	<div class="form-group">
+			             	  	<label>{{ langsArr[langsName].city }} </label><div class="error_messages user_state">{{ langsArr[langsName].pleaseSelect }} {{ langsArr[langsName].city }}</div>
+				                <selectize options='login.userStateListOptions' id="userState" name="user_state" config="{create: true,maxItems: 1,required: true}" data-ng-model="login.userState" ng-disabled="disable">
+				                </selectize>
+			              	</div>
+			              	<!-- <div class="col-xs-12 col-sm-12">
+			                	<label>{{ langsArr[langsName].city }}<span>*</span></label>
+			                    <input class="form-control" type="text" name="city" placeholder="{{ langsArr[langsName].city }}" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].city}}"}]}]'>
+			                </div> -->
+				    		<div class="form-group">
+				    			<label>{{ langsArr[langsName].addressLine1 }}<sup>*</sup></label>
+			                	<textarea class="form-control" name="address_line_1" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].addressLine1}}"}]}]'></textarea>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].addressLine2 }}<sup>*</sup></label>
+			                	<textarea class="form-control" name="address_line_2" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].addressLine2}}"}]}]'></textarea>
+			                </div>
+			                 <div class="form-group">
+			                	<label>{{ langsArr[langsName].region }}</label>
+			                	<input class="form-control" type="text" name="region">
+			                </div>
+			                 <div class="form-group">
+			                	<label>{{ langsArr[langsName].poBox }}</label>
+			                	<input class="form-control" type="text" name="poBox">
+			                </div>
+			                <div class="form-group">
+		                    	<button class="btn" type="submit">{{ langsArr[langsName].continueTxt }}</button>
+		                	</div>
+						</form>
+					
+				</div>
+			</div>
+			<div class="col-md-6">
+                <div class="customformwrap">
+                	<div class="alert alert-danger" data-ng-if="loginMessage">{{ loginMessage }}</div>
+	                <div class="login-process-area">
+	                    
+	                       <form data-ng-submit="loginFn(userName,password)">
+	                       <h1>{{ langsArr[langsName].plogin }}</h1>
+	                           <div class="form-group">
+	                               <input class="form-control" type="text" data-ng-model="userName" name="userName" placeholder="{{ langsArr[langsName].eMail}}">
+	                           </div>
+	                           <div class="form-group">
+	                               <input class="form-control" type="password" data-ng-model="password" name="password" placeholder="{{ langsArr[langsName].password}}">
+	                           </div>
+	                           <div class="form-group">
+	                               <div class="checkbox">
+	                                   <label>
+	                                       <input type="checkbox" name="remember">{{ langsArr[langsName].remember }}</label>
+	                               </div>
+	                               	<p><a data-ng-href="{{bootPoint}}fp">{{ langsArr[langsName].forGotPass }}? | </a>
+	                               <a data-ng-href="{{bootPoint}}signup">{{ langsArr[langsName].createAc }}</a></p>
+	                           </div>
+	                           
+	                           <div class="form-group">
+
+	                               <button class="btn" type="submit">{{ langsArr[langsName].submit }}</button>
+	                           </div>
+	                       </form>
+	                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div data-ng-if="addedInCartItems.length" class="table-responsive cart-info" data-ng-include="'views/common/proceed-products.html'"></div>
+</div>

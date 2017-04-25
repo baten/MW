@@ -1,0 +1,28 @@
+<div class="container">  
+	<div class="wraper-inner">      
+		<div class="row">
+			<!-- {{ search.searchProductLists }} -->
+			<div class="col-xs-12">
+				<div class="loading" data-ng-if="search.shopLoading"><img src="images/loading.31feb317.gif" /></div>    
+				<section class="product-container category">
+					<div class="row" data-ng-if="!search.shopLoading && search.searchProductLists.length > 0">
+					    <div class="col-xs-12 col-sm-6 col-md-3" data-ng-repeat="(key,val) in search.searchProductLists">
+							<products product-obj="val" replace-number="replaceNumber(input,langs)" image-location="{{search.productImgUrl}}" boot-point="{{ bootPoint }}" currency-obj="currency" show-currency-value="showCurrencyValue(price,curPrice)"></products>
+					        <!-- <scroll></scroll> -->
+					    </div>
+					</div> 
+					<div class="row" data-ng-if="!search.shopLoading && search.searchProductLists.length == 0">
+					    There is no product
+					</div>          
+				</section>  
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal -->
+
+<div class="col-sm-4 col-md-3" data-ng-include="'views/common/quick-view-modal.html'"></div> 
+
+ 

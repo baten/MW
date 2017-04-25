@@ -1,0 +1,22 @@
+<div class="container">  
+	<div class="wraper-inner">      
+        <div class="row">
+			<div class="col-xs-12 col-sm-8 col-md-8">
+				<div class="common-intro">
+                	<h2 data-ng-bind="page.title"></h2>
+					<p data-ng-bind-html="page.details"></p>
+                </div>
+                <div class="faq-content">
+                	<uib-accordion close-others="oneAtATime">
+					    <div uib-accordion-group class="panel-default" heading="{{details.question}}" data-ng-repeat="details in page.pageDetails">
+					    <p data-ng-bind="details.question"></p>
+					    </div>
+				  </uib-accordion>
+                </div>
+			</div>
+			 
+           	<div class="col-xs-12 col-sm-4 col-md-4" data-ng-include="'views/common/right-side-bar.html'"></div>
+		</div>
+	</div>
+</div>
+ 

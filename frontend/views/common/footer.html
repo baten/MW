@@ -1,0 +1,71 @@
+<footer>
+      <div class="footer-top">
+        <div class="container">
+          <div class="row">
+	        <div class="col-xs-6 col-sm-3 col-sm-3" data-ng-repeat="(key,value) in footerTopMenuList">
+	          <div class="footerbox">
+	          <h3 data-ng-bind="value.Menu.title"></h3>
+	            <ul class="footerlink">
+	              <li data-ng-repeat="childMenu in value.ChildMenu">
+		              	<a data-ng-if="childMenu.type == 'content'" data-ng-href="{{bootPoint}}page/{{childMenu.link_data | lowercase}}">{{childMenu.title}}</a>
+			            <a data-ng-if="childMenu.type == 'static'" data-ng-href="{{bootPoint}}{{childMenu.link_data | lowercase}}">{{childMenu.title}}</a>
+		          		<a data-ng-if="childMenu.type == 'external'" data-ng-href="{{bootPoint}}engine/img/site/{{childMenu.link_data}}" target="_blanks">{{childMenu.title}}</a>
+		          		<a data-ng-if="childMenu.type == 'functional'" data-ng-href="{{bootPoint}}{{childMenu.link_data}}">{{childMenu.title}}</a>
+	              </li>
+	            </ul>
+	          </div>
+	        </div>
+	        <div class="col-xs-6 col-sm-3 col-sm-3" >
+	          <div class="footerbox">
+	          <h3>Shop By</h3>
+	            <ul class="footerlink">
+	             <li><a data-ng-href="{{bootPoint}}/brands">{{ langsArr[langsName].brand }}</a></li>
+	             <li><a data-ng-href="{{bootPoint}}/clubs">{{ langsArr[langsName].club }}</a></li>
+	              <li data-ng-repeat="footerCatMenu in catListEng" data-ng-if="$index <= 3">
+		           		<a data-ng-href="{{bootPoint}}single-category/{{footerCatMenu.Category.slug}}">{{footerCatMenu.Category.title}}</a>
+		           </li>
+		           <li data-ng-repeat="footerCatMenu in catList" data-ng-if="$index <= 3" >
+		           		<a data-ng-href="{{bootPoint}}single-category/{{footerCatMenu.Category.slug}}">{{footerCatMenu.Category.title}}</a>
+		           </li>
+		           
+	            </ul>
+	          </div>
+	        </div>
+	        <div class="col-xs-12 col-sm-3 col-md-3">
+	          <div class="footerbox">
+	          <h3>SOCIAL MEDIA LINKS</h3>
+	            <ul class="social">
+	            	<li data-ng-repeat="socialNetwork in socialNetworkList">
+	            	 	<a data-ng-href="{{socialNetwork.SocialNetwork.url}}" target="_blank" alt="{{socialNetwork.SocialNetwork.title}}" title="{{socialNetwork.SocialNetwork.title}}"><i class="{{socialNetwork.SocialNetwork.iconClass}}" aria-hidden="true"></i></a> 
+	            	</li>
+	          	</ul>
+	          	<p class="text-{{subscribeMessageStatus}}" data-ng-if="subscribeMessage">{{subscribeMessage}}</p>
+		        <form data-ng-submit="subscription()" name="subscribeForm" id="subscribeForm">
+		          	<input type="text"name="email" required class="form-control" placeholder="Enter your Email here" data-validate='[{"notEmpty":[{"message":"Please input your email"}]}]'>
+		            <button type="submit" class="btn-subscribe">{{ langsArr[langsName].subscribe }}</button>
+		          </form>
+	            <img class="payment" src="images/payment.png" alt="payment">
+	          </div>
+	        </div>
+      </div>
+      </div>
+      </div>
+      <div class="footer-btm">
+        <div class="container">
+          <div class="row">
+          <div class="col-xs-6 ">
+          <ul class="list-inline">
+             <li data-ng-repeat="footerBottom in footerMenuList">
+             	<a data-ng-href="{{bootPoint}}page/{{footerBottom.Menu.link_data}}">{{footerBottom.Menu.title}}</a>
+             </li>
+            </ul>
+            </div>
+            <div class="col-xs-6">
+              <P>
+                Design & Developed By <a target="_blank" href="http://uysys.com">UY Systems Ltd</a>. All right reserved @ Matjar Alwatany 2017
+              </P>
+            </div>
+          </div>
+        </div>
+      </div>
+</footer>

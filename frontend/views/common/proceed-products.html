@@ -1,0 +1,34 @@
+<table class="table">
+	<thead>
+		<tr>
+			<th>{{ langsArr[langsName].item}}</th>
+			<th>{{ langsArr[langsName].description}}</th>
+			<th>{{ langsArr[langsName].unitPrice}}</th>
+			<th>{{ langsArr[langsName].quantity}}</th>
+			<th>{{ langsArr[langsName].subTotal}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr data-ng-repeat="(key,val) in addedInCartItems">
+			<td>  
+				<img data-ng-src="{{val.imgUrl}}" class="review-img">
+			</td>
+	        <td>
+	        	{{ val.productTitle }}
+	        	<p data-ng-if="val.attributes" data-ng-repeat="(k,v) in val.attributes">{{k}} : {{v}}</p>
+	        </td>
+			<td>{{currencySymbol}} {{ replaceNumber(showCurrencyValue(val.productBasePrice,currency.CurrencyValue.value),langsName) }}</td>
+			<td> {{ replaceNumber(val.productQuantity,langsName) }}</td>
+			<td><p class="price">{{currencySymbol}} {{ replaceNumber(showCurrencyValue(val.productBasePrice * val.productQuantity,currency.CurrencyValue.value),langsName) }}</p></td>
+	      </tr>
+		<tr>
+	       <td colspan="6">
+		      <p>{{ langsArr[langsName].totalUnitPrice}} : {{currencySymbol}} {{replaceNumber(showCurrencyValue(totalPriceInCart + discountAmount ,currency.CurrencyValue.value) | number:2,langsName)}}<br>
+		      	<span data-ng-if="discountAmount">{{ langsArr[langsName].discount}}: -{{currencySymbol}} {{replaceNumber(showCurrencyValue(discountAmount ,currency.CurrencyValue.value) | number:2,langsName)}}<br></span>
+				{{ langsArr[langsName].totalCost}}: {{currencySymbol}} {{replaceNumber(showCurrencyValue(totalPriceInCart - proceedOrder.shippingCost ,currency.CurrencyValue.value) | number:2 ,langsName)}}
+		      </p>
+	       </td>
+	        
+		</tr>
+	</tbody>
+</table>

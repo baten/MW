@@ -1,0 +1,53 @@
+<form data-ng-submit="addToCart($event)">
+    <div class="listbox">
+        <!-- value pass to cart -->
+            <div class="valuePassToCart">
+            <input type="hidden" name="productId" value="{{ productObj.Product.id }}">
+            <input type="hidden" name="productTitle" value="{{ productObj.Product.title }}">
+            <input type="hidden" name="productBasePrice" value="{{ productObj.Product.price }}">
+            <input type="hidden" id="inc-{{ productObj.Product.id }}" data-ng-value="{{ addedCartItems[productObj.Product.id].productQuantity ? addedCartItems[productObj.Product.id].productQuantity : 1 }}" min="1" name="productQuantity">
+            <input type="hidden" name="productUnit" data-ng-if="productObj.Product.unit" value="{{productObj.Product.quantity}} {{productObj.Product.unit}}" />
+        </div>
+      <div class="product-img imgbox" data-ng-if="productObj.Product.ProductImage">
+        <input type="hidden" name="imgUrl" value="{{imageLocation}}{{productObj.Product.ProductImage[0].id}}.{{productObj.Product.ProductImage[0].extension}}">
+        <a data-ng-href="{{ bootPoint }}details/{{productObj.Product.slug}}"><img class="img-responsive center-block imgurl" data-ng-src="{{imageLocation}}{{productObj.Product.ProductImage[0].id}}.{{productObj.Product.ProductImage[0].extension}}" alt="{{productObj.Product.title}}"></a>
+        <div class="overlay">
+           <a data-ng-href="{{ bootPoint }}details/{{productObj.Product.slug}}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+          <!-- <a data-ng-href="{{ bootPoint }}details/{{productObj.Product.slug}}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+          <a href="#" data-toggle="tooltip" data-placement="bottom"
+       title="" data-original-title="Tooltip on bottom"
+       class="red-tooltip">Tooltip on bottom</a>  -->       
+        </div>
+      </div>
+      <div class="product-img imgbox" data-ng-if="productObj.ProductImage">
+            <input type="hidden" name="imgUrl" value="{{imageLocation}}{{productObj.ProductImage[0].id}}.{{productObj.ProductImage[0].extension}}">
+            <a data-ng-href="{{ bootPoint }}details/{{productObj.Product.slug}}"><img class="img-responsive center-block imgurl" data-ng-src="{{imageLocation}}{{productObj.ProductImage[0].id}}.{{productObj.ProductImage[0].extension}}" alt="{{productObj.Product.title}}"></a>
+            <div class="overlay">
+          <a data-ng-href="javascript:void(0)" data-toggle="modal" data-ng-click="$root.getModal('productModal',productObj.Product.slug)">Quick View</a>
+        </div>
+        </div>
+      <p class="cart-wrapper hidden">
+      	<a data-ng-href="{{ bootPoint }}details/{{productObj.Product.slug}}">
+      		<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+      	</a>
+      	<a href="javascript:void(0)"> 
+      	 	<!-- wishlist directive -->
+			<wishlistdirective product-id="{{ productObj.Product.id }}" product-slug="{{ productObj.Product.slug }}" lang-addtowishlist = "{{langsArr[langsName].addToWishlist}}" lang-addinwishlist = "{{langsArr[langsName].addedInWishList}}"></wishlistdirective>
+      	 </a>
+      </p>
+      <div class="product-content">
+        <P class="brand-name" data-ng-if="productObj.brandName">{{productObj.brandName}}</P>
+        <P class="brand-name" data-ng-if="!productObj.brandName">&nbsp;</P>
+      <P class="short-title" ><a data-ng-href="{{ bootPoint }}details/{{productObj.Product.slug}}">{{productObj.Product.title}}</a></P>
+      <P class="price" data-ng-if="productObj.Product.options < 1 ">{{ langsArr[langsName].price }}: 
+          {{currencySymbol}}{{replaceNumber({input:showCurrencyValue({price:productObj.Product.price,curPrice:currencyObj.CurrencyValue.value}),langs:langsName})}}
+      </P>
+      <P class="price" data-ng-if="productObj.Product.options > 0 ">{{ langsArr[langsName].price }}: 
+        <small>
+          {{currencySymbol}}{{replaceNumber({input:showCurrencyValue({price:productObj.Product.price,curPrice:currencyObj.CurrencyValue.value}),langs:langsName})}}
+        </small>
+        <span>{{currencySymbol}}{{replaceNumber({input:showCurrencyValue({price:productObj.Product.sale_price,curPrice:currencyObj.CurrencyValue.value}),langs:langsName})}}</span>
+      </P>
+      </div>
+    </div>
+</form>

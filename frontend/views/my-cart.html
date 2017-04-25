@@ -1,0 +1,80 @@
+<div class="container">
+<div class="wraper-inner">
+<div class="row">
+<div class="col-xs-12 ">
+	<!-- Cart -->
+	<div class="wish-list common-intro">
+		<h2 class="reviewHeadingBig"> {{ langsArr[langsName].cart }} </h2> 
+			<div class="table-responsive">
+				<table class="table wishTable" data-ng-if="getLength(addedInCartItems) != 0">
+			      <thead class="cart">
+			        <tr class="reviewHeading">
+			          <th>{{ langsArr[langsName].product }}</th>
+			          <th>{{ langsArr[langsName].description }}</th>
+			          <th>{{ langsArr[langsName].quantity }}</th>
+			          <th>{{ langsArr[langsName].total }}</th>
+			          <th>{{ langsArr[langsName].productDelete }}</th>
+			        </tr>
+			      </thead>
+			      <tbody>
+					<tr data-ng-repeat="(key,val) in addedInCartItems">
+						<td>
+							<a data-ng-href="{{bootPoint}}details/{{val.productSlug}}">
+								<img class="review-img" data-ng-src="{{host}}{{ val.imgUrl }}" alt="{{ val.productTitle }}">
+							</a>
+						</td>
+						<td class="reviewDescription">
+							<h4>
+								<a href="{{bootPoint}}details/{{val.productSlug}}">{{ val.productTitle }}</a>
+							</h4>
+							<p data-ng-if="val.attributes" data-ng-repeat="(k,v) in val.attributes">{{k}} : {{v}}</p>
+						</td>
+						<td>
+							<div class="productQuantity"> 
+								<a href="javascript:void(0)" class="decrease" data-ng-click="decreamentCartQty(key)">-</a>
+	                            <input type="text" value="{{ val.productQuantity }}" min="1" name="quantity" id="inc-{{val.stockId}}" readonly class="ng-pristine ng-valid ng-not-empty ng-touched ng-untouched">
+	                            <a href="javascript:void(0)" class="increase" data-ng-click="increamentCartQty(key)">+</a> 
+							</div>
+						</td>
+						<td class="text-center">
+							<p class="price">{{currencySymbol}} {{ replaceNumber(showCurrencyValue(val.productBasePrice * val.productQuantity,currency.CurrencyValue.value) ,langsName) }}</p>
+						</td>
+						
+						<td class="text-center">
+							<a href="javascript:void(0);" class="cancel-wish" data-ng-click="removeSingleItem(key)"><i class="grocer-icon icon-cancel"></i></a>
+						</td>
+					</tr>
+				
+					<tr>
+						<td colspan="2">
+							<div class="countWrapper dc-code ">
+								  <label data-ng-if = "cuponAvailabilityMessage" class="text-danger dislbl">
+								  	{{ langsArr[langsName].discountAvailabilityMessage }} 
+								  </label>
+							      <input type="text" class="form-control dispad" data-ng-model="couponCode" placeholder="{{ langsArr[langsName].discountCode }}" name="couponCode" required />
+							      <button type="button" class="btn btn-small" data-ng-click="getDiscount(couponCode)"><i class="fa fa-scissors"></i> {{ langsArr[langsName].submit }}</button>
+							</div>
+							<div class="countWrapper top50">
+							     <a data-ng-href="{{bootPoint}}" class="btn btn-small btn-wishlist"><i class="grocer-icon icon-left"></i> {{ langsArr[langsName].backToShopping}}</a>
+							     <a data-ng-click="gotoProceed()" class="btn btn-small"><i class="fa fa-share"></i> {{ langsArr[langsName].proceedOrder }}</a>
+							</div>
+						</td>
+						<td colspan="3" class="cart-info-total">
+							<ul class="pull-right">
+								<li>{{ langsArr[langsName].total }}<strong>{{currencySymbol}} {{replaceNumber(showCurrencyValue(totalPriceInCart + discountAmount,currency.CurrencyValue.value) | number:2 ,langsName)}}</strong></li>
+								<li data-ng-if="discountAmount > 0">{{ langsArr[langsName].discount }} <strong>{{currencySymbol}} {{replaceNumber(showCurrencyValue(discountAmount,currency.CurrencyValue.value),langsName)}}</strong></li>
+								<!-- <li>Tax <span>50 ৳</span></li> -->
+								<li>{{ langsArr[langsName].subTotal }} <strong>{{currencySymbol}} {{replaceNumber(showCurrencyValue(totalPriceInCart,currency.CurrencyValue.value) | number:2 ,langsName)}}</strong></li>
+							</ul>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+</div>
+	</div>
+</div>
+
+ 

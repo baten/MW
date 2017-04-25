@@ -1,0 +1,10 @@
+<!-- COUNTING -->
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-3 text-center" data-ng-repeat="overview in main.overviews">
+          <i class="fa fa-{{overview.Overview.cssClass}}" aria-hidden="true"></i><br>
+        	<span class="counter" count-to="{{overview.Overview.num_of_items}}" value="1" duration="4" filter="number"></span>
+          <p>{{overview.Overview.title}}</p>
+        </div> <!-- /.col-sm-3 -->
+      </div> <!-- /.row -->
+    </div><!-- /.container -->

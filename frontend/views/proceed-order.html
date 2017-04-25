@@ -1,0 +1,164 @@
+<div class="container">  
+	<div class="wraper-inner">      
+		<div class="proceedbox cart"> 
+        	<h2 class="sub-headingproceed" align="center">{{ langsArr[langsName].cartInfo}}</h2>
+			<div class="table-responsive pro-summary">
+				<table>
+	                 <tr>
+	                     <th>{{ langsArr[langsName].item}}</th>
+	                     <th>{{ langsArr[langsName].description}}</th>
+	                      <th>{{ langsArr[langsName].unitPrice}}</th>
+	                      <th>{{ langsArr[langsName].quantity}}</th>
+	                      <th>{{ langsArr[langsName].subTotal}}</th>
+	                   </tr>
+	                   <tr data-ng-repeat="(key,val) in addedInCartItems">
+	                     <td>  
+	                     	<img data-ng-src="{{host}}{{val.imgUrl}}" class="review-img">
+	                     </td>
+	                     <td>
+	                     	{{ val.productTitle }}
+	                     	<p data-ng-if="val.attributes" data-ng-repeat="(k,v) in val.attributes">{{k}} : {{v}}</p>
+	                     </td>
+	                      <td>{{currencySymbol}} {{ replaceNumber(showCurrencyValue(val.productBasePrice,currency.CurrencyValue.value),langsName) }}</td>
+	                      <td> {{ replaceNumber(val.productQuantity,langsName) }}</td>
+	                      <td><p class="price">{{currencySymbol}} {{ replaceNumber(showCurrencyValue(val.productBasePrice * val.productQuantity,currency.CurrencyValue.value),langsName) }}</p></td>
+	                   </tr>
+                        <tr class="text-bold">
+                          <td>{{ langsArr[langsName].totalUnitPrice}}</td>
+                            <td>{{currencySymbol}} {{replaceNumber(showCurrencyValue(totalPriceInCart + discountAmount,currency.CurrencyValue.value) | number:2,langsName)}}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        
+                        <tr class="text-bold" data-ng-if="proceedOrder.shippingCost !==''">
+                          <td>{{ langsArr[langsName].shippingCost}}</td>
+                            <td>{{currencySymbol}} {{replaceNumber(showCurrencyValue(proceedOrder.shippingCost ,currency.CurrencyValue.value) | number:2,langsName)}}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="text-bold" data-ng-if="proceedOrder.shippingMessage">
+                          <td>{{ langsArr[langsName].shippingCost}}</td>
+                            <td>{{proceedOrder.shippingMessage}}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="text-bold" data-ng-if="discountAmount">
+                          <td>{{ langsArr[langsName].discount}}</td>
+                            <td>{{currencySymbol}} {{replaceNumber(showCurrencyValue(discountAmount ,currency.CurrencyValue.value) | number:2,langsName)}}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+                        <tr class="text-bold gray">
+                          <td>{{ langsArr[langsName].totalCost}}</td>
+                            <td>{{currencySymbol}} {{replaceNumber(showCurrencyValue(totalPriceInCart + proceedOrder.shippingCost,currency.CurrencyValue.value) | number:2 ,langsName)}}</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                            <td>&nbsp;</td>
+                        </tr>
+					</table>
+			</div>
+		</div>
+		<div class="headingproceed">{{ langsArr[langsName].shippingDetails }}</div>
+        <p>{{proceedOrder.userDetails.fname}}, {{proceedOrder.userDetails.lname}},{{proceedOrder.userDetails.state}}, {{proceedOrder.userDetails.country}}</p>
+         <form data-ng-submit="proceedOrder.orderNow()" name="proceedFrm" id="proceedFrm">
+			<div class="billing-info user-box" style="display:none;">
+				<div class="form-group">
+					<label>{{ langsArr[langsName].fname }}<sup>*</sup></label>
+				    <input class="form-control" type="text" name="fname" data-ng-model="proceedOrder.userDetails.fname" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].fname}}"}]}]'>
+				</div>
+				<div class="form-group">
+					<label>{{ langsArr[langsName].lname }}<sup>*</sup></label>
+				    <input class="form-control" type="text" name="lname" data-ng-model="proceedOrder.userDetails.lname" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].lname}}"}]}]'>
+				</div>
+				<div class="form-group">
+					<label>{{ langsArr[langsName].phone }}<sup>*</sup></label>
+				    <input class="form-control" type="text" name="phone" data-ng-model="proceedOrder.userDetails.phone" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].phone}}"}]}]'>
+				</div>
+				<div class="form-group">
+	                <label>{{ langsArr[langsName].country }}</label><div class="error_messages user_country">{{ langsArr[langsName].pleaseSelect }} {{ langsArr[langsName].country }}</div>
+	                <selectize options='proceedOrder.countryListOptions' data-ng-model="proceedOrder.userCountry" id="user_country" name="user_country" config="{create: true,maxItems: 1,required: true}" ng-disabled="disable" data-ng-change="proceedOrder.getUserStateList(proceedOrder.userCountry);">
+	                </selectize>
+	           	</div>
+	        	 <div class="form-group">
+	           	  	<label>{{ langsArr[langsName].city }} </label><div class="error_messages user_state">{{ langsArr[langsName].pleaseSelect }} {{ langsArr[langsName].city }}</div>
+	               <selectize options='proceedOrder.userStateListOptions' id="userState" name="user_state" config="{create: true,maxItems: 1,required: true}" data-ng-model="proceedOrder.userState" ng-disabled="disable" data-ng-change="proceedOrder.getShippingCost(proceedOrder.userCountry,proceedOrder.userState);">
+	               </selectize>
+				</div>
+	            <div class="form-group">
+	            	<label>{{ langsArr[langsName].addressLine1 }}<span>*</span></label>
+	            	<textarea class="form-control" name="address_line_1" placeholder="{{ langsArr[langsName].addressLine1 }}" data-ng-model="proceedOrder.userDetails.address_line_1"></textarea>
+	            </div>
+	             <div>
+	             	<label>{{ langsArr[langsName].addressLine2 }}<span>*</span></label>
+	             	<textarea class="form-control" name="address_line_2" placeholder="{{ langsArr[langsName].addressLine2 }}">{{proceedOrder.userDetails.address_line_2}}</textarea>
+	             </div>
+		 		<div class="form-group">
+	             	<label>{{ langsArr[langsName].region }}</label>
+	             	<input class="form-control" type="text" name="region" placeholder="{{ langsArr[langsName].region }}" data-ng-model="proceedOrder.userDetails.region">
+	             </div>
+	              <div class="form-group">
+	             	<label>{{ langsArr[langsName].poBox }}</label>
+	             	<input class="form-control" type="text" name="poBox" placeholder="{{ langsArr[langsName].poBox }}" data-ng-model="proceedOrder.userDetails.poBox">
+	             </div>
+	        	</div>
+	        	<h4 class="btn-shipping" data-ng-click="proceedOrder.slideDownBilling()" data-ng-if="proceedOrder.showDetails"> {{ langsArr[langsName].changeShippiDtls}}</h4>
+	        	<h4 class="btn-shipping" data-ng-click="proceedOrder.slideUpBilling()" data-ng-if="proceedOrder.hideDetails"> {{ langsArr[langsName].close}} </h4>
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+		              <div class="proceedbox ship"> 
+		              	<h2 class="sub-headingproceed"> {{ langsArr[langsName].paymentMethod}}</h2>
+			              <div class="inner">
+				             <!--  <div class="radio">
+				                	<input name='paymentMethod' id="sadadcard" type="radio" data-ng-model="proceedOrder.paymentType" value="sadad"/>
+				                  <label><img src="../images/sadad.c1ae59aa.png" alt="Payment"></label>
+				              </div> -->
+				              <div class="radio">
+				                <input name='paymentMethod' id="cashon" type="radio" data-ng-model="proceedOrder.paymentType" value="cod" data-ng-checked="true"/>
+				                  <label>{{ langsArr[langsName].cashOnDelivery}}</label>
+				              </div>
+			              </div>
+		              </div>
+		              	<div data-ng-if="proceedOrder.dataLoading"><img src="images/loading.31feb317.gif" /></div>
+		             	<div class="cartbtn">
+		                 <button class="btn" type="submit" data-ng-disabled="proceedOrder.disable">{{ langsArr[langsName].conOrder }}</button>
+		               </div>
+		            </div> 
+		            <div class="col-xs-12 col-sm-6">
+		            
+		              <div class="proceedbox coupon"> 
+		                <h2 class="sub-headingproceed">{{ langsArr[langsName].discountCode }}</h2>
+		                <div class="inner">
+		                  <input type="text" class="form-control" data-ng-model="couponCode" placeholder="{{ langsArr[langsName].discountCode }}" name="couponCode" data-ng-change="getDiscount(couponCode)">
+		                </div>
+		              </div>
+		            </div> 
+	            </div>
+           </form>
+	</div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="stockInfoModal" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Product Stock Info</h4>
+      </div>
+      <div class="modal-body">
+        	<ul>
+        		<li data-ng-repeat="(key,value) in proceedOrder.outOfStockProducts">
+        			{{value.title}} now available quantity  : {{value.quantity}} 
+        		</li>
+        	</ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>

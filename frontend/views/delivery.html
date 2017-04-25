@@ -1,0 +1,47 @@
+<div class="col-sm-8 col-md-9">
+    <div class="min-height">
+        <h1>Product Order Process</h1>
+        <ul class="proceed-list">
+            <li class="active"><i class="icon-location-outline" aria-hidden="true"></i></li>
+            <li class="active"><i class="icon-delivery" aria-hidden="true"></i></li>
+            <li><i class="icon-cards-payment" aria-hidden="true"></i></li>
+<!--             <li><i class="icon-confirmation" aria-hidden="true"></i></li> -->
+        </ul>
+        <!-- Second Form Delivery -->
+        <form class="proceedForm" data-ng-submit="delivery.deliverInstructionFn()" name="deliverInstructionFrm" id="deliverInstructionFrm">
+            <div class="col-xs-12 col-sm-12">
+                <label>Delivery Instruction</label>
+                <textarea class="form-control" name="instruction" data-ng-model="instruction" placeholder="ex: Call me before delivery" data-validate='[{"notEmpty":[{"message":"Please write Delivery Instruction"}]}]'></textarea>
+            </div>
+            <div class="col-xs-12 col-sm-12">
+                <label>when do you like your express delivery?</label>
+                <div class="dual">
+                 
+                    <select class="form-control half" name="date" data-ng-model="date" data-validate='[{"notEmpty":[{"message":"Please select date"}]}]'>
+                        <option value="">Date</option>
+                        <option value="13-08-2016" data-ng-repeat="(key,val) in delivery.dateObj" value="{{val | date:'dd-MM-yyyy'}}">{{val | date:'dd-MM-yyyy'}}</option>
+                        
+                    </select>
+                    <input type="text" name="date" data-ng-model="date" class="form-control half datepicker hidden" placeholder="dd-mm-yyyy">
+                    <select class="form-control half" name="time" data-ng-model="time" data-validate='[{"notEmpty":[{"message":"Please select time"}]}]'>
+                        <option value="">Time</option>
+                        <option value="8am – 11am">8am – 11am</option>
+                        <option value="12pm – 4pm">12pm – 4pm</option>
+                        <option value="7pm – 10pm">7pm – 10pm</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12">
+                <button class="btn" type="submit">Next: payment method</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+     /*------ DATEPICKER----------*/
+
+   $('.datepicker').datepicker({
+    format: 'dd-mm-yyyy'
+   }).on('changeDate', function(ev){
+    $(this).datepicker('hide');});
+</script>

@@ -1,0 +1,174 @@
+<div class="header-top-wrapper">
+    <div class="container">
+      <div class="header-top">
+      <div class="row">
+        <div class="col-xs-12 col-sm-5">
+          <span class="pull-left" style="margin-right: -50px;"><img class="img-auto" src="images/{{language}}.png"/></span>
+          <select name="language" data-ng-model="language" data-ng-change="changeLangs(language)">
+            <option value="bengali"  style="background-image:url(images/bengali.png);"><span>Arabic</span></option>
+            <option value="english"  style="background-image:url(images/english.png);">English</option>
+          </select>
+          <div class="phonewrapper">
+            <a href="tel:{{siteInfo.phones}}"><i class="fa fa-clock-o" aria-hidden="true"></i> {{replaceNumber(siteInfo.phones,langsName)}}</a>
+          </div>
+        </div>
+        <div class="col-xs-12 col-sm-7">
+          <ul class="account-info">
+          <!-- top nav -->
+          	<li data-ng-if="headerMenuList" data-ng-repeat="headerMenu in headerMenuList">
+          		<a data-ng-if="headerMenu.Menu.type === 'content'" data-ng-href="{{bootPoint}}page/{{headerMenu.Menu.link_data}}">{{headerMenu.Menu.title}}</a>
+          		<a data-ng-if="headerMenu.Menu.type === 'static'" data-ng-href="{{bootPoint}}{{headerMenu.Menu.link_data}}">{{headerMenu.Menu.title}}</a>
+          		<a data-ng-if="headerMenu.Menu.type === 'external'" data-ng-href="{{bootPoint}}engine/img/site/{{headerMenu.Menu.link_data}}" target="_blanks">{{headerMenu.Menu.title}}</a>
+          	</li>
+            <!-- if logged in -->
+                <li class="dropdown" data-ng-if="loggedIn == true">
+                    <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="grocer-icon icon-user-1"></i> {{loggedUser.details.fname}}<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a data-ng-href="{{bootPoint}}profile">{{ langsArr[langsName].profile }}</a></li>
+                 		<li><a data-ng-href="{{bootPoint}}order-history">{{ langsArr[langsName].orderHistory }}</a></li>
+                 		<li><a data-ng-href="{{bootPoint}}wishlist">{{ langsArr[langsName].wishList }}</a></li>
+                 		 <li><a data-ng-href="{{bootPoint}}logout">{{ langsArr[langsName].logout }}</a></li>
+                    </ul>
+                </li>
+                <!-- if logged out -->
+                <li data-ng-if="!loggedIn"><a data-ng-href="{{bootPoint}}login"><i class="grocer-icon icon-user-1"></i> {{ langsArr[langsName].login }}</a></li>
+                <li class="visible-xs">
+                    <form class="navbar-form navbar-left">
+                        <input class="form-control" placeholder="{{ langsArr[langsName].gSearch }}" type="text">
+                        <button type="button" class="btn-search"><i class="grocer-icon icon-search"></i></button>
+                    </form>
+                </li>
+            <li data-ng-click="toggleCart('cart-content')"><a href="javascript:void(0);">{{ langsArr[langsName].cart}} ({{replaceNumber(totalItemsInCart,langsName)}})</a></li>
+          </ul>
+        </div>
+      </div>
+      </div>
+    </div>
+    </div>
+ 
+  <header>    
+    <!-- Navbar -->
+    <nav class="navbar navbar-default new">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-new" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" data-ng-href="{{bootPoint}}"><img src="images/logo.png" alt="logo"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="nav-new">
+        <!-- Mega Menu -->
+          <ul class="nav navbar-nav">
+            <li class="dropdown mega-dropdown" data-ng-repeat="category in catList" data-ng-if="$index < 4">
+	          <a class="dropdown-toggle" data-toggle="dropdown" data-ng-href="{{ bootPoint }}single-category/{{ category.Category.slug }}">{{category.Category.title}}<span data-ng-if="category.children.length > 0 " class="caret"></span></a>
+	          <ul class="dropdown-menu mega-dropdown-menu row col-{{categoryMenuColCalculation(category.children)}}" data-ng-if="category.children.length>0">
+	                <li class="col-sm-3" data-ng-repeat="subCat in category.children">
+						 <a data-ng-class="{'dropdown-header':subCat.children.length >0 }" data-ng-href="{{ bootPoint }}single-category/{{ subCat.Category.slug }}">{{subCat.Category.title}}</a>
+						<ul data-ng-if="subCat.children.length > 0">
+							<li data-ng-repeat="subChildCat in subCat.children">
+								<a data-ng-href="{{ bootPoint }}single-category/{{ subChildCat.Category.slug }}">{{subChildCat.Category.title}}</a>
+							</li>
+						</ul>
+	                </li>
+	          </ul>
+        	</li>
+        	 <li class="dropdown mega-dropdown" data-ng-repeat="category in catListEng" data-ng-if="$index < 4">
+	          <a class="dropdown-toggle" data-toggle="dropdown" data-ng-href="{{ bootPoint }}single-category/{{ category.Category.slug }}">{{category.Category.title}}<span data-ng-if="category.children.length > 0 " class="caret"></span></a>
+	          <ul class="dropdown-menu mega-dropdown-menu row col-{{categoryMenuColCalculation(category.children)}}" data-ng-if="category.children.length>0">
+	                <li class="col-sm-3" data-ng-repeat="subCat in category.children">
+						 <a data-ng-class="{'dropdown-header':subCat.children.length >0 }" data-ng-href="{{ bootPoint }}single-category/{{ subCat.Category.slug }}">{{subCat.Category.title}}</a>
+						<ul data-ng-if="subCat.children.length > 0">
+							<li data-ng-repeat="subChildCat in subCat.children">
+								<a data-ng-href="{{ bootPoint }}single-category/{{ subChildCat.Category.slug }}">{{subChildCat.Category.title}}</a>
+							</li>
+						</ul>
+	                </li>
+	          </ul>
+        	</li>
+        	<li class="dropdown mega-dropdown" data-ng-if="brandList.length > 0 ">
+        		<a class="dropdown-toggle" data-toggle="dropdown" href="javascript:void(0)">{{ langsArr[langsName].brand }}<span class="caret"></span></a>
+        		<ul class="dropdown-menu mega-dropdown-menu row col-1" data-ng-if="brandList.length < 12">
+        			<li class="col-sm-3" data-ng-repeat="brand in brandList">
+        				<a data-ng-href="{{bootPoint}}single-brand/{{brand.Brand.slug}}">{{ brand.Brand.title }}</a>
+        			</li>
+        		</ul>
+        		<ul class="dropdown-menu mega-dropdown-menu row col-2" data-ng-if="brandList.length > 11 && brandList.length < 24">
+        			<li class="col-sm-3" data-ng-repeat="brand in brandList">
+        				<a data-ng-href="{{bootPoint}}single-brand/{{brand.Brand.slug}}">{{ brand.Brand.title }}</a>
+        			</li>
+        		</ul>
+        		<ul class="dropdown-menu mega-dropdown-menu row col-2" data-ng-if="brandList.length > 23 && brandList.length < 36">
+        			<li class="col-sm-3" data-ng-repeat="brand in brandList">
+        				<a data-ng-href="{{bootPoint}}single-brand/{{brand.Brand.slug}}">{{ brand.Brand.title }}</a>
+        			</li>
+        		</ul>
+        		<ul class="dropdown-menu mega-dropdown-menu row col-2" data-ng-if="brandList.length > 35 && brandList.length < 48">
+        			<li class="col-sm-3" data-ng-repeat="brand in brandList">
+        				<a data-ng-href="{{bootPoint}}single-brand/{{brand.Brand.slug}}">{{ brand.Brand.title }}</a>
+        			</li>
+        		</ul>
+        	</li>
+        	<li><a data-ng-href="{{bootPoint}}deal">{{ langsArr[langsName].deal }}</a></li>
+        	<li><a data-ng-href="{{bootPoint}}locations">{{ langsArr[langsName].location }}</a></li>
+          </ul>
+          <!-- Mega Menu -->
+         
+          <form class="navbar-form navbar-right logocontainer">
+            <div class="form-group">
+               <input class="form-control" placeholder="{{ langsArr[langsName].gSearch }}" type="text" data-ng-model="searchText" name="searchText" data-ng-change="getSearchProducts(searchText)">
+            </div>
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </form>
+          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- Navbar -->
+  </header>
+  
+  <header>    
+    <!-- Navbar -->
+    <nav class="navbar navbar-default new silver">
+      <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-new" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" data-ng-href="{{bootPoint}}"><img src="images/logo.png" alt="logo"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="nav-new">
+			<ul class="nav navbar-nav">
+	            <!-- Mega Menu -->
+	            <!-- dynamic mega menu start-->
+	            <li class="dropdown mega-dropdown" data-ng-repeat="category in catListEng" data-ng-if="$index < 4">
+	            {{category}}
+	            	 <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{category.Category.title}} <span data-ng-if="category.children.length > 0 " class="caret"></span></a>
+	            	 <ul id="{{$index}}" class="dropdown-menu mega-dropdown-menu row column-{{generateMenu(category.children,$index)}}" data-ng-if="category.children.length>0">
+	            	 </ul>
+	            </li>
+	            <!-- dynamic mege menu end -->
+			</ul>
+          <form class="navbar-form navbar-right logocontainer">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </form>
+          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- Navbar -->
+  </header>

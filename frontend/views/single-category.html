@@ -1,0 +1,31 @@
+<div class="container">  
+	<div class="wraper-inner"> 
+	<div class="loading" data-ng-if="singleCat.dataLoading"><img src="images/loading.31feb317.gif" /></div>
+	  <!-- lazy loader -->
+      <img class="full-img" data-ng-if="singleCat.category" data-ng-src="{{imgUrl}}product_categories/s-{{singleCat.category.id}}.{{singleCat.category.img}}">     
+		<div class="row">
+			<div class="col-sm-4 col-md-3" data-ng-include="'views/common/categories.html'"></div> 
+			<div class="col-sm-8 col-md-9">
+			<div class="loading" data-ng-if="singleCat.lazyLoading"><img src="images/loading.31feb317.gif" /></div>
+				<section class="product-container category" infinite-scroll='loadMore()' infinite-scroll-distance='0'>
+					<div class="row">
+						<em data-ng-repeat="(ky,vl) in productList">
+							<div class="col-xs-12 col-sm-6 col-md-4" data-ng-repeat="(key,val) in vl">
+						    	<products product-obj="val" replace-number="replaceNumber(input,langs)" image-location="{{singleCat.productImgUrl}}" boot-point="{{ bootPoint }}" currency-obj="currency" show-currency-value="showCurrencyValue(price,curPrice)"></products>
+							</div>
+						</em>
+						
+					</div> 
+					<div class="uy-pagination">
+						<uib-pagination data-ng-if="singleCat.totalItems > 48" items-per-page="singleCat.itemsPerPage" ng-change="singleCat.pageChanged(currentPage)" total-items="singleCat.totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+					</div>       
+			    </section>  
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!-- Modal -->
+
+<div class="col-sm-4 col-md-3" data-ng-include="'views/common/quick-view-modal.html'"></div> 

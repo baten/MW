@@ -1,0 +1,82 @@
+<div class="container">  
+    <div class="user-box">      
+        <div class="row">
+			<div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-offset-3 col-md-5">
+				<div class="customformwrap">
+					<h1>{{ langsArr[langsName].pleaseSinup }}</h1>
+					<div class="alert alert-danger" data-ng-if="signup.showMessage">{{ langsArr[langsName].alreadyRegistered}}</div>
+					<div class="s-up">
+						<form name="registrationFrm" data-ng-submit="signup.registrationStep1()" id="registrationFrm">
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].fname }}<span>*</span></label>
+			                    <input class="form-control" type="text" name="details[fname]" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].fname}}"}]}]'>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].lname }}<span>*</span></label>
+			                    <input class="form-control" type="text" name="details[lname]" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].lname}}"}]}]'>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].eMail }}<span>*</span></label>
+			                    <input class="form-control" type="email" name="username"  data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].eMail}}"}]},{"email":[{"message":"{{langsArr[langsName].errorMessageValidPrefix}} {{langsArr[langsName].eMail}}"}]}]'>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].phone }}<span>*</span></label>
+			                    <input class="form-control" type="text" name="details[phone]" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].phone}}"}]}]'>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].password }}<span>*</span></label>
+			                    <input class="form-control" type="password" name="password" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].password}}"}]}]'>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].confirmPassword }}<span>*</span></label>
+			                  <input class="form-control" type="password" name="repassword"
+		                       data-validate='[{"notEmpty":[{"message":"This field is required."}]},{"compairWith":[{"options":[{"compairField":"password"}]}, {"message":"Password does not match"}]}]' placeholder="{{ langsArr[langsName].confirmPassword }}">
+			              	</div>
+			                <div class="form-group">
+		                    	<button class="btn" type="submit">{{ langsArr[langsName].continueTxt }}</button>
+		                	</div>
+						</form>
+					</div>
+	            	<div class="shipping" style="display:none">
+	            		<form name="shippingFrm" data-ng-submit="signup.registrationStep2()" id="shippingFrm">
+			                <div class="form-group">
+				                <label>{{ langsArr[langsName].country }}</label><div class="error_messages user_country">{{ langsArr[langsName].pleaseSelect }} {{ langsArr[langsName].country }}</div>
+				                <selectize options='signup.countryListOptions' data-ng-model="signup.userCountry" id="user_country" name="user_country" config="{create: true,maxItems: 1,required: true}" ng-disabled="disable" data-ng-change="signup.getUserStateList(signup.userCountry);">
+				                </selectize>
+			              	</div>
+		             	 	<div class="form-group">
+			             	  	<label>{{ langsArr[langsName].city }} </label><div class="error_messages user_state">{{ langsArr[langsName].pleaseSelect }} {{ langsArr[langsName].city }}</div>
+				                <selectize options='signup.userStateListOptions' id="userState" name="user_state" config="{create: true,maxItems: 1,required: true}" data-ng-model="signup.userState" ng-disabled="disable">
+				                </selectize>
+			              	</div>
+			              	<!-- <div class="col-xs-12 col-sm-12">
+			                	<label>{{ langsArr[langsName].city }}<span>*</span></label>
+			                    <input class="form-control" type="text" name="details[city]" placeholder="{{ langsArr[langsName].city }}" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].city}}"}]}]'>
+			                </div> -->
+				    		<div class="form-group">
+				    			<label>{{ langsArr[langsName].addressLine1 }}<span>*</span></label>
+			                	<textarea class="form-control" name="details[address_line_1]" placeholder="{{ langsArr[langsName].addressLine1 }}" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].addressLine1}}"}]}]'></textarea>
+			                </div>
+			                <div class="form-group">
+			                	<label>{{ langsArr[langsName].addressLine2 }}<span>*</span></label>
+			                	<textarea class="form-control" name="details[address_line_2]" data-validate='[{"notEmpty":[{"message":"{{langsArr[langsName].errorMessagePrefix}} {{langsArr[langsName].addressLine2}}"}]}]'></textarea>
+			                </div>
+			                 <div class="form-group">
+			                	<label>{{ langsArr[langsName].region }}</label>
+			                	<input class="form-control" type="text" name="details[region]">
+			                </div>
+			                 <div class="form-group">
+			                	<label>{{ langsArr[langsName].poBox }}</label>
+			                	<input class="form-control" type="text" name="details[poBox]">
+			                </div>
+			                <div class="form-group">
+		                    	<button class="btn" type="submit">{{ langsArr[langsName].uSubmit }}</button>
+		                	</div>
+		                </form>
+		    		</div>
+			    </div>
+			</div>
+		</div>
+	</div>
+	<div data-ng-if="addedInCartItems.length" class="table-responsive cart-info" data-ng-include="'views/common/proceed-products.html'"></div>
+</div>

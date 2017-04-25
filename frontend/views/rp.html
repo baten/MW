@@ -1,0 +1,20 @@
+<div class="col-sm-8 col-md-9">
+    <div class="login-process-area">
+        <h1>{{ langsArr[langsName].resetPassword }}</h1>
+        <div class="alert {{fp.messageClass}}" data-ng-if="fp.showMessage">{{fp.showMessage}}</div>
+        <div class="col-xs-12 col-sm-12 col-md-7">
+            <form class="proceedForm signUp" data-ng-submit="fp.resetPassword($event)" id="frmResetPass" name="frmResetPass">
+	               
+	              <div class="col-xs-12 col-sm-12">
+	                  <input class="form-control" type="password" name="password" data-ng-model='fp.password' data-validate='[{"notEmpty":[{"message":"Please input your password"}]}]' placeholder="{{ langsArr[langsName].newPassword }}">
+	              </div>
+	              <div class="col-xs-12 col-sm-12">
+	                  <input class="form-control" type="password" name="repassword" placeholder="{{ langsArr[langsName].confirmPassword }}" data-validate='[{"notEmpty":[{"message":"This field is required."}]},{"compairWith":[{"options":[{"compairField":"password"}]}, {"message":"Password does not match"}]}]'>
+	              </div>
+	              <div class="col-xs-12 col-sm-12">
+	                  <button class="btn" type="submit">{{ langsArr[langsName].submit }}</button>
+	              </div>
+			</form>
+        </div>         
+    </div>
+</div>

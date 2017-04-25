@@ -1,0 +1,82 @@
+<div class="col-xs-6 col-sm-3 col-md-2 cart-content">
+    <div class="cart-wrapper">
+		<div class="cart-head" data-ng-click="toggleCart('cart-content')">
+            <div class="itemCount">
+                <i class="grocer-icon icon-bag"></i> {{replaceNumber(totalItemsInCart,langsName)}} {{ langsArr[langsName].items }}
+            </div>
+            <div><i class="grocer-icon icon-right"></i></div>
+            <div class="total">
+                {{currencySymbol}} {{replaceNumber(showCurrencyValue(totalPriceInCart,currency.CurrencyValue.value) | number:2,langsName)}}
+                
+            </div>
+        </div>
+        <!-- /.cart-head -->
+     	
+     	<div class="discountCode">
+            <a title="Discount Code Help" data-ng-click="showDiscountCode($event)"><i class="grocer-icon icon-angle-circled-down"></i>  
+            <span>{{ langsArr[langsName].haveDiscount }}</span>
+            <i class="grocer-icon pull-right icon-help-1"></i></a>
+            <div class="input-group discount-form" style="display:none;">
+            <label data-ng-if="discountAmount > 0">{{ langsArr[langsName].discountAmount }} : {{currencySymbol}} {{replaceNumber(showCurrencyValue(discountAmount,currency.CurrencyValue.value),langsName)}}</label>
+             <label data-ng-if = "cuponAvailabilityMessage !==''" class="text-danger">{{cuponAvailabilityMessage}}</label>
+                <input type="text" class="form-control" data-ng-model="couponCode" placeholder="{{ langsArr[langsName].discountCode }}" name="couponCode" required />
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" data-ng-click="getDiscount(couponCode)">{{ langsArr[langsName].submit }}</button>
+                </span>
+            </div>
+        </div>
+         
+          
+		<div class="cartContents">
+            <ul data-ng-if="getLength(addedInCartItems) != 0">
+                <li data-ng-repeat="(key,val) in addedInCartItems">                
+                    <div class="shortDes">
+                        <div class="media">
+                            <div class="media-left">
+                                <a data-ng-href="{{bootPoint}}details/{{val.productSlug}}">
+                                    <img class="media-object" data-ng-src="{{host}}{{ val.imgUrl }}" alt="{{ val.productTitle }}">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{{ val.productTitle }}</h4> {{currencySymbol}} {{ replaceNumber(showCurrencyValue(val.productBasePrice,currency.CurrencyValue.value),langsName) }}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.shortDes -->
+                    <div class="count">
+                        <div class="productQuantity">
+                            <!-- <a href="javascript:void(0)" class="decrease" data-ng-click="decreamentCartQty(key)">-</a>
+                            <input type="text" value="{{ val.productQuantity }}" min="1" name="quantity" id="inc" readonly>
+                            <a href="javascript:void(0)" class="increase" data-ng-click="increamentCartQty(key)">+</a> -->
+                            
+                            <a data-ng-href="{{bootPoint}}cart" class="decrease">-</a>
+                            <input type="text" value="{{ val.productQuantity }}" min="1" name="quantity" id="inc" readonly>
+                            <a data-ng-href="{{bootPoint}}cart"class="increase" >+</a>
+                        </div>
+                    </div>
+                    <!-- /.count -->
+                    <div class="cancel" data-ng-click="removeSingleItem(key)">
+                        <i class="grocer-icon icon-cancel"></i>
+                    </div>
+                    <!-- /.cancel -->
+                </li>                
+            </ul>
+            <ul data-ng-if="getLength(addedInCartItems) === 0">
+                <li>{{ langsArr[langsName].noItem }}</li>
+            </ul>
+		</div>
+	</div>
+    <!-- /.cart-wrapper -->
+    <div class="proceedBtn">
+        <p>{{ langsArr[langsName].forHelp }} : <br><a>{{replaceNumber(siteInfo.phones,langsName)}}</a></p>
+        <!-- <a class="btn float-cart" data-ng-click="gotoProceed()"> {{ langsArr[langsName].placeOrder }}</a> -->
+        <a class="btn float-cart" data-ng-href="{{bootPoint}}cart"> {{ langsArr[langsName].cart }}</a>
+        <a class="btn float-cart" data-ng-click="gotoProceed()">{{ langsArr[langsName].proceedOrder}}</a>
+    </div>
+
+
+    <div class="floatbtn" data-ng-click="toggleCart('cart-content')">
+        <i class="grocer-icon icon-bag"></i>
+       {{ langsArr[langsName].cart }}
+    </div>
+</div>

@@ -1,0 +1,76 @@
+<div class="container">  
+    <div class="wraper-inner">      
+        <div class="row">
+<div class="col-xs-12 col-sm-12 col-md-offset-1 col-md-10">
+  <div class="min-height">
+    <h1>Billing Info</h1>
+    <ul class="proceed-list">
+      <li class="active"><i class="icon-location-outline" aria-hidden="true"></i></li>
+      <li class="active"><i class="icon-cards-payment" aria-hidden="true"></i></li>
+      <!-- <li><i class="icon-confirmation" aria-hidden="true"></i></li> -->
+    </ul>
+    <div class="alert {{payment.messageClass}}" data-ng-if="payment.showMessage">{{payment.showMessage}}</div>
+    <!-- Second Form Delivery --> 
+    <!-- Third Form Delivery -->
+    <form class="proceedForm" data-ng-submit="payment.orderFn()" name="orderFrm" id="orderFrm">
+      <div class="custom">
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <input id="cod" class="input-hidden" data-ng-selected="selected"  type="radio" name="payMethod" value="cod" data-ng-model="payment.paymentType.name"/>
+        <label for="cod"> <img src="images/cash-img.c94418e1.jpg" alt="Cash on Delivery" /> </label>
+      </div>
+      <div class="col-xs-6 col-sm-4 col-md-3">
+        <input id="debitCard" class="input-hidden" type="radio" name="payMethod" value="debitcard" data-ng-model="payment.paymentType.name"/>
+        <label for="debitCard"> <img src="images/debit-card.cd7ba2de.jpg" alt="Debit Card" /> </label>
+      </div>
+    </div>
+      <div class="col-xs-12 col-md-7">
+        <div class="purchaseDetails">
+          <P class="head"> your purchase </P>
+          <P> <span>Sub Total</span> <span> {{currencySymbol}} {{replaceNumber(payment.subTotal,langsName)}} </span> </P>
+          <P><span>Delivery Charge</span><span>{{currencySymbol}} {{replaceNumber(payment.shippingCost,langsName)}}</span></P>
+          <P data-ng-if="discountAmount > 0"><span>Discount </span><span>{{currencySymbol}} {{replaceNumber(discountAmount,langsName)}}</span></P>
+          <P class="total"><span>Total</span><span>{{currencySymbol}} {{replaceNumber(payment.grandTotal - discountAmount | number : 2,langsName)}}</span></P>
+          <!--  <P><span>Special Code</span> <span><a href="#">Apply</a></span></P> --> 
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-5">
+        <div class="purchaseDetails">
+          <P class="head">Address </P>
+          <P>{{payment.shippingAddress}}</P>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-12">
+        <button class="btn" type="submit">pay now</button>
+      </div>
+    </form>
+    <!-- load hidden form  -->
+    <div data-ng-bind-html="payment.hiddenForm"></div>
+  </div>
+  
+<!-- Button trigger modal -->
+ 
+<!-- Modal -->
+<div class="modal fade" id="stockInfoModal" tabindex="-1">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Product Stock Info</h4>
+      </div>
+      <div class="modal-body">
+        	<ul>
+        		<li data-ng-repeat="(key,value) in payment.outOfStockProducts">
+        			{{value.title}} now available quantity  : {{value.quantity}} 
+        		</li>
+        	</ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+</div>

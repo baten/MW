@@ -1,0 +1,13 @@
+<div class="right-menu">
+	<div class="mob-right-menu visible-xs">
+	  company info <i class="fa fa-angle-right pull-right" aria-hidden="true"></i> <i class="fa fa-angle-down pull-right" aria-hidden="true"></i>
+	</div>
+    <ul class="list-group" data-ng-if="aboutMenuList" >
+	    <li data-ng-repeat="aboutMenu in aboutMenuList" class="list-group-item">
+	   		<a data-ng-if="aboutMenu.Menu.type === 'content'" data-ng-href="{{bootPoint}}about/{{aboutMenu.Menu.link_data}}">{{aboutMenu.Menu.title}}</a>
+	   		<a data-ng-if="aboutMenu.Menu.type === 'static'" data-ng-href="{{bootPoint}}about/{{aboutMenu.Menu.link_data}}">{{aboutMenu.Menu.title}}</a>
+	   		<a data-ng-if="aboutMenu.Menu.type === 'external'" data-ng-href="{{bootPoint}}engine/img/site/{{aboutMenu.Menu.link_data}}" target="_blanks">{{aboutMenu.Menu.title}}</a>
+	   		<a data-ng-if="aboutMenu.Menu.type === 'functional'" data-ng-href="{{bootPoint}}about/{{aboutMenu.Menu.link_data}}">{{aboutMenu.Menu.title}}</a>
+       	</li>
+	</ul>
+</div>

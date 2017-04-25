@@ -1,0 +1,7 @@
+	<div data-ng-if="main.banners">
+	    <uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+	        <uib-slide ng-repeat="(ind,val) in main.banners" index="ind">
+	               <img data-ng-src="{{main.ImgUrl}}banners/{{val.Banner.id}}.{{val.Banner.image_extension}}">
+	        </uib-slide>
+	    </uib-carousel>
+	</div>

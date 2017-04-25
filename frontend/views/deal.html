@@ -1,0 +1,26 @@
+<div class="container">  
+	<div class="wraper-inner">      
+		<div class="row">
+			<div class="col-sm-12 col-md-12">
+			    <section class="product-container category">   
+			        	<div class="catTitle">
+			            <h1><span>{{ langsArr[langsName].deal }}</span></h1>
+			        </div>
+			        <div class="row" data-ng-if="!deal.shopLoading">
+			            <div class="col-xs-12 col-sm-3 col-md-3" data-ng-repeat="(key,val) in deal.shopProductList">
+			                <products product-obj="val" replace-number="replaceNumber(input,langs)" image-location="{{deal.productImgUrl}}" boot-point="{{ bootPoint }}" currency-obj="currency" show-currency-value="showCurrencyValue(price,curPrice)"></products>
+			                <!-- <scroll></scroll> -->
+			            </div>
+			        </div> 
+					<div class="uy-pagination">
+						<uib-pagination data-ng-if="deal.totalItems > 20" items-per-page="deal.itemsPerPage" ng-change="deal.pageChanged(currentPage)" total-items="deal.totalItems" ng-model="currentPage" max-size="maxSize" class="pagination-sm" boundary-links="true" rotate="false"></uib-pagination>
+					</div>       
+			    </section>  
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- Modal -->
+
+<div class="col-sm-4 col-md-3" data-ng-include="'views/common/quick-view-modal.html'"></div> 
